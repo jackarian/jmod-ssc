@@ -52,6 +52,8 @@ import net.wimpi.modbus.util.SerialParameters;
 
 public class SerialFacadeTest {
 
+	
+	
 	public static void main(String[] args) {
 		int inChar = -1;
 		int result = 0;
