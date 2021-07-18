@@ -134,26 +134,16 @@ public class SerialFacadeTest {
 					short val = ModbusUtil.registerToShort(inputs[0].toBytes());
 					System.out.println("Valore estratto registro: "+val);
 				}
-//				 Register[] regs = new Register[1];
-//				 regs[0] = new SimpleInputRegister(0x0000);
-//					
-//				 msm.writeSingleRegister(slaveId, YottaProtocolAddressMapping.Protocol.getAddress(), regs[0]);
+
 			}
 			InputRegister[] inputs = null;
 			Register[] regs = new Register[2];
 			regs[1] = new SimpleInputRegister(0x0000);
 			regs[0] = new SimpleInputRegister(0x4100);
-			// regs[2] = new SimpleInputRegister(0);
-			// regs[3] = new SimpleInputRegister(0);
-//				regs[4] = new SimpleInputRegister(0);
-//				regs[5] = new SimpleInputRegister(0);
-//				regs[6] = new SimpleInputRegister(0);
-//				regs[7] = new SimpleInputRegister(0);
-			// Registro 40065 Fail safe mode 65535 disabilita la funzione
+	
 
 			if (slaveId > 1) {
-				// msm.writeMultipleRegisters(slaveId, 0x14, regs);
-				//for (int i = 0; i < 8; i++) {
+				
 					System.out.println("Tentativo lettura slave: " + slaveId);
 					try {
 						   SDMUtils.printVoltage(msm, slaveId);
