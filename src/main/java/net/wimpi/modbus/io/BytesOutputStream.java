@@ -61,48 +61,59 @@ public class BytesOutputStream extends FastByteArrayOutputStream implements
 	 * 
 	 * @return the reference to the <tt>byte[]</tt> output buffer.
 	 */
+	@Override
 	public byte[] getBuffer() {
 		return buf;
 	}// getBuffer
 
+	@Override
 	public void reset() {
 		count = 0;
 	}// reset
 
+	@Override
 	public void writeBoolean(boolean v) throws IOException {
 		m_Dout.writeBoolean(v);
 	}// writeBoolean
 
+	@Override
 	public void writeByte(int v) throws IOException {
 		m_Dout.writeByte(v);
 	}// writeByte
 
+	@Override
 	public void writeShort(int v) throws IOException {
 		m_Dout.writeShort(v);
 	}// writeShort
 
+	@Override
 	public void writeChar(int v) throws IOException {
 		m_Dout.writeChar(v);
 	}// writeChar
 
+	@Override
 	public void writeInt(int v) throws IOException {
 		m_Dout.writeInt(v);
 	}// writeInt
 
+	@Override
 	public void writeLong(long v) throws IOException {
 		m_Dout.writeLong(v);
 	}// writeLong
 
 	// @commentstart@
+	@Override
 	public void writeFloat(float v) throws IOException {
 		m_Dout.writeFloat(v);
 	}// writeFloat
 
+	@Override
 	public void writeDouble(double v) throws IOException {
 		m_Dout.writeDouble(v);
 	}// writeDouble
 		// @commentend@
 
+	@Override
 	public void writeBytes(String s) throws IOException {
 		int len = s.length();
 		for (int i = 0; i < len; i++) {
@@ -110,10 +121,12 @@ public class BytesOutputStream extends FastByteArrayOutputStream implements
 		}
 	}// writeBytes
 
+	@Override
 	public void writeChars(String s) throws IOException {
 		m_Dout.writeChars(s);
 	}// writeChars
 
+	@Override
 	public void writeUTF(String str) throws IOException {
 		m_Dout.writeUTF(str);
 	}// writeUTF

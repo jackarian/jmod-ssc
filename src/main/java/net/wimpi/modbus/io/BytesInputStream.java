@@ -121,6 +121,7 @@ public class BytesInputStream extends FastByteArrayInputStream implements
 	 * 
 	 * @return the reference to the <tt>byte[]</tt> input buffer.
 	 */
+	@Override
 	public byte[] getBuffer() {
 		return buf;
 	}// getBuffer
@@ -129,64 +130,79 @@ public class BytesInputStream extends FastByteArrayInputStream implements
 		return buf.length;
 	}// getBufferLength
 
+	@Override
 	public void readFully(byte b[]) throws IOException {
 		m_Din.readFully(b);
 	}// readFully
 
+	@Override
 	public void readFully(byte b[], int off, int len) throws IOException {
 		m_Din.readFully(b, off, len);
 	}// readFully
 
+	@Override
 	public int skipBytes(int n) throws IOException {
 		return m_Din.skipBytes(n);
 	}// skipBytes
 
+	@Override
 	public boolean readBoolean() throws IOException {
 		return m_Din.readBoolean();
 	}// readBoolean
 
+	@Override
 	public byte readByte() throws IOException {
 		return m_Din.readByte();
 	}
 
+	@Override
 	public int readUnsignedByte() throws IOException {
 		return m_Din.readUnsignedByte();
 	}// readUnsignedByte
 
+	@Override
 	public short readShort() throws IOException {
 		return m_Din.readShort();
 	}// readShort
 
+	@Override
 	public int readUnsignedShort() throws IOException {
 		return m_Din.readUnsignedShort();
 	}// readUnsignedShort
 
+	@Override
 	public char readChar() throws IOException {
 		return m_Din.readChar();
 	}// readChar
 
+	@Override
 	public int readInt() throws IOException {
 		return m_Din.readInt();
 	}// readInt
 
+	@Override
 	public long readLong() throws IOException {
 		return m_Din.readLong();
 	}// readLong
 
 	// @commentstart@
+	@Override
 	public float readFloat() throws IOException {
 		return m_Din.readFloat();
 	}// readFloat
 
+	@Override
 	public double readDouble() throws IOException {
 		return m_Din.readDouble();
 	}// readDouble
 		// @commentend@
 
+	@Override
 	public String readLine() throws IOException {
 		throw new IOException("Not supported.");
 	}// readLine
 
+	@Override
 	public String readUTF() throws IOException {
 		return m_Din.readUTF();
 	}// readUTF

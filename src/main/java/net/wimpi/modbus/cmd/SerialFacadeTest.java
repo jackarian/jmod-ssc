@@ -41,8 +41,11 @@ package net.wimpi.modbus.cmd;
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusException;
 import net.wimpi.modbus.facade.ModbusSerialMaster;
+import net.wimpi.modbus.io.sdm120M.SDMUtils;
+import net.wimpi.modbus.io.yotta.YottaProtocolAddressMapping;
 import net.wimpi.modbus.procimg.InputRegister;
 import net.wimpi.modbus.procimg.Register;
+import net.wimpi.modbus.procimg.SimpleInputRegister;
 import net.wimpi.modbus.util.BitVector;
 import net.wimpi.modbus.util.ModbusUtil;
 import net.wimpi.modbus.util.SerialParameters;
@@ -53,7 +56,7 @@ public class SerialFacadeTest {
 		int inChar = -1;
 		int result = 0;
 		boolean finished = false;
-		int slaveId = 88;
+		int slaveId = 3;
 		String portname = null;
 		ModbusSerialMaster msm = null;
 
@@ -74,11 +77,9 @@ public class SerialFacadeTest {
 			}
 
 			System.out.println(" sending test messages to slave: " + slaveId);
-			System.out.println("net.wimpi.modbus.debug set to: "
-					+ System.getProperty("net.wimpi.modbus.debug"));
+			System.out.println("net.wimpi.modbus.debug set to: " + System.getProperty("net.wimpi.modbus.debug"));
 
-			System.out
-					.println("Hit enter to start and <s enter> to terminate the test.");
+			System.out.println("Hit enter to start and <s enter> to terminate the test.");
 			inChar = System.in.read();
 			if ((inChar == 's') || (inChar == 'S')) {
 				System.out.println("Exiting");
@@ -88,12 +89,12 @@ public class SerialFacadeTest {
 			// 2. Setup serial parameters
 			SerialParameters params = new SerialParameters();
 			params.setPortName(portname);
-			params.setBaudRate(38400);
+			params.setBaudRate(9600);
 			params.setDatabits(8);
 			params.setParity("None");
 			params.setStopbits(1);
 			params.setEncoding("rtu");
-			params.setEcho(true);
+			params.setEcho(false);
 			if (Modbus.debug)
 				System.out.println("Encoding [" + params.getEncoding() + "]");
 
@@ -101,100 +102,75 @@ public class SerialFacadeTest {
 			msm = new ModbusSerialMaster(params);
 			msm.connect();
 
-			do {
-				if (msm.writeCoil(slaveId, 4, true) == true) {
-					System.out.println("Set output 5 to true");
-				} else {
-					System.err.println("Error setting slave " + slaveId
-							+ " output 5");
-				}
-				BitVector coils = msm.readCoils(slaveId, 0, 8);
-				if (coils != null) {
-					System.out.print("Coils:");
-					for (int i = 0; i < coils.size(); i++) {
-						System.out.print(" " + i + ": " + coils.getBit(i));
-					}
-					System.out.println();
+			slaveId= 6;
 
+			BitVector value = new BitVector(8);
+			value.setBit(0, true);
+			value.setBit(1, true);
+			value.setBit(2, true);
+			value.setBit(3, true);
+			value.setBit(4, true);
+			value.setBit(5, true);
+			value.setBit(6, true);
+			value.setBit(7, true);
+
+			if (slaveId == 0||slaveId==1) {
+
+//				 msm.writeCoil(slaveId, 0x10, true); //OUTPUT 0
+//				 msm.writeCoil(slaveId, 0x11, true);// OUTPUT 1
+//				 msm.writeCoil(slaveId, 0x12, true);// OUTPUT 2
+//				 msm.writeCoil(slaveId, 0x13, true);// OUTPUT 3
+//				 msm.writeCoil(slaveId, 0x14, true);// OUTPUT 4
+//				 msm.writeCoil(slaveId, 0x15, true);// OUTPUT 5
+//				 msm.writeCoil(slaveId, 0x16, true);// OUTPUT 6
+//				 msm.writeCoil(slaveId, 0x17, true);// OUTPUT 7
+
+				//msm.writeMultipleCoils(slaveId, 0x10, value);
+    			 
+    			 
+				 InputRegister[] inputs = msm.readMultipleRegisters(slaveId, YottaProtocolAddressMapping.ModuleID.getAddress(),1);
+				 
+				 if(inputs!=null) {
+					short val = ModbusUtil.registerToShort(inputs[0].toBytes());
+					System.out.println("Valore estratto registro: "+val);
+				}
+//				 Register[] regs = new Register[1];
+//				 regs[0] = new SimpleInputRegister(0x0000);
+//					
+//				 msm.writeSingleRegister(slaveId, YottaProtocolAddressMapping.Protocol.getAddress(), regs[0]);
+			}
+			InputRegister[] inputs = null;
+			Register[] regs = new Register[2];
+			regs[1] = new SimpleInputRegister(0x0000);
+			regs[0] = new SimpleInputRegister(0x4100);
+			// regs[2] = new SimpleInputRegister(0);
+			// regs[3] = new SimpleInputRegister(0);
+//				regs[4] = new SimpleInputRegister(0);
+//				regs[5] = new SimpleInputRegister(0);
+//				regs[6] = new SimpleInputRegister(0);
+//				regs[7] = new SimpleInputRegister(0);
+			// Registro 40065 Fail safe mode 65535 disabilita la funzione
+
+			if (slaveId > 1) {
+				// msm.writeMultipleRegisters(slaveId, 0x14, regs);
+				//for (int i = 0; i < 8; i++) {
+					System.out.println("Tentativo lettura slave: " + slaveId);
 					try {
-						msm.writeMultipleCoils(slaveId, 0, coils);
-					} catch (ModbusException ex) {
-						System.out.println("Error writing coils: " + result);
-					}
-				} else {
-					System.out.println("Outputs: null");
-					msm.disconnect();
-					System.exit(-1);
-				}
+						   SDMUtils.printVoltage(msm, slaveId);
+				           SDMUtils.leggMeterId(slaveId, msm);
 
-				BitVector digInp = msm.readInputDiscretes(slaveId, 0, 8);
+					} catch (Exception e) {
+						System.out.println("Fallimento lettura slave: " + slaveId);
+						e.printStackTrace();
+					}
+					Thread.sleep(2000);
+				//}
+			}
 
-				if (digInp != null) {
-					System.out.print("Digital Inputs:");
-					for (int i = 0; i < digInp.size(); i++) {
-						System.out.print(" " + i + ": " + digInp.getBit(i));
-					}
-					System.out.println();
-					System.out.println("Inputs: "
-							+ ModbusUtil.toHex(digInp.getBytes()));
-				} else {
-					System.out.println("Inputs: null");
-					msm.disconnect();
-					System.exit(-1);
-				}
+			finished = true;
+			
+			
 
-				InputRegister[] ai = null;
-				for (int i = 1000; i < 1010; i++) {
-					ai = msm.readInputRegisters(slaveId, i, 1);
-					if (ai != null) {
-						System.out.print("Tag " + i + ": ");
-						for (int n = 0; n < ai.length; n++) {
-							System.out.print(" " + ai[n].getValue());
-						}
-						System.out.println();
-					} else {
-						System.out.println("Tag: " + i + " null");
-						msm.disconnect();
-						System.exit(-1);
-					}
-				}
-
-				Register[] regs = null;
-				for (int i = 1000; i < 1005; i++) {
-					regs = msm.readMultipleRegisters(slaveId, i, 1);
-					if (regs != null) {
-						System.out.print("RWRegisters " + i + " length: "
-								+ regs.length);
-						for (int n = 0; n < regs.length; n++) {
-							System.out.print(" " + regs[n].getValue());
-						}
-						System.out.println();
-					} else {
-						System.out.println("RWRegisters " + i + ": null");
-						msm.disconnect();
-						System.exit(-1);
-					}
-				}
-				regs = msm.readMultipleRegisters(slaveId, 0, 10);
-				System.out.println("Registers: ");
-				if (regs != null) {
-					System.out.print("regs :");
-					for (int n = 0; n < regs.length; n++) {
-						System.out.print("  " + n + "= " + regs[n]);
-					}
-					System.out.println();
-				} else {
-					System.out.println("Registers: null");
-					msm.disconnect();
-					System.exit(-1);
-				}
-				while (System.in.available() > 0) {
-					inChar = System.in.read();
-					if ((inChar == 's') || (inChar == 'S')) {
-						finished = true;
-					}
-				}
-			} while (!finished);
 		} catch (Exception e) {
 			System.err.println("SerialFacadeTest driver: " + e);
 			e.printStackTrace();
@@ -202,8 +178,24 @@ public class SerialFacadeTest {
 		msm.disconnect();
 	}
 
+	
+	
 	private static void printUsage() {
-		System.out
-				.println("java net.wimpi.modbus.cmd.SerialAITest <portname [String]>  <Unit Address [int8]>");
+		System.out.println("java net.wimpi.modbus.cmd.SerialAITest <portname [String]>  <Unit Address [int8]>");
 	}// printUsage
+
+	
+	
+	/**
+	 * 
+	 * @param value
+	 * @param msm
+	 * @param registro
+	 * @param slaveId
+	 * @throws ModbusException
+	 */
+	public static void impostatUsciteModuloYotta(BitVector value, ModbusSerialMaster msm, int registro, int slaveId)
+			throws ModbusException {
+		msm.writeMultipleCoils(slaveId, registro, value);
+	}
 }

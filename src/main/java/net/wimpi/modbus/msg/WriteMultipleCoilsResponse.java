@@ -86,18 +86,21 @@ public final class WriteMultipleCoilsResponse extends ModbusResponse {
 		m_BitCount = count;
 	}// setBitCount
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 
 		dout.writeShort(getReference());
 		dout.writeShort(m_BitCount);
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 
 		setReference(din.readUnsignedShort());
 		m_BitCount = din.readUnsignedShort();
 	}// readData
 
+	@Override
 	public String toString() {
 		return "WriteMultpleCoilsResponse - Ref: " + getReference()
 				+ " Coils: " + m_BitCount;

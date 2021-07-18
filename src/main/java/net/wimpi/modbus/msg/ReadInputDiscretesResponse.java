@@ -131,11 +131,13 @@ public final class ReadInputDiscretesResponse extends ModbusResponse {
 		m_Discretes.setBit(index, b);
 	}// setDiscreteStatus
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeByte(m_Discretes.byteSize());
 		dout.write(m_Discretes.getBytes(), 0, m_Discretes.byteSize());
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 
 		int count = din.readUnsignedByte();
@@ -152,6 +154,7 @@ public final class ReadInputDiscretesResponse extends ModbusResponse {
 		setDataLength(count + 1);
 	}// readData
 
+	@Override
 	public String toString() {
 		return "ReadInputDiscretesResponse - Coils: " + getBitCount();
 	}

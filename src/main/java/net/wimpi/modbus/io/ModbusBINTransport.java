@@ -52,11 +52,13 @@ public class ModbusBINTransport extends ModbusSerialTransport {
 	public ModbusBINTransport() {
 	}// constructor
 
+	@Override
 	public void close() throws IOException {
 		m_InputStream.close();
 		m_OutputStream.close();
 	}// close
 
+	@Override
 	public void writeMessage(ModbusMessage msg) throws ModbusIOException {
 
 		try {
@@ -89,6 +91,7 @@ public class ModbusBINTransport extends ModbusSerialTransport {
 		}
 	}// writeMessage
 
+	@Override
 	public ModbusRequest readRequest() throws ModbusIOException {
 
 		boolean done = false;
@@ -143,6 +146,7 @@ public class ModbusBINTransport extends ModbusSerialTransport {
 
 	}// readRequest
 
+	@Override
 	public ModbusResponse readResponse() throws ModbusIOException {
 
 		boolean done = false;
@@ -212,6 +216,7 @@ public class ModbusBINTransport extends ModbusSerialTransport {
 	 * @throws java.io.IOException
 	 *             if an I\O related error occurs.
 	 */
+	@Override
 	public void prepareStreams(SerialInputStream in, SerialOutputStream out)
 			throws IOException {
 		m_InputStream = new DataInputStream(new ASCIIInputStream(in));

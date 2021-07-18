@@ -81,11 +81,13 @@ public final class WriteSingleRegisterResponse extends ModbusResponse {
 		m_RegisterValue = value;
 	}// setRegisterValue
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeShort(getReference());
 		dout.writeShort(getRegisterValue());
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 		setReference(din.readUnsignedShort());
 		setRegisterValue(din.readUnsignedShort());
@@ -93,6 +95,7 @@ public final class WriteSingleRegisterResponse extends ModbusResponse {
 		setDataLength(4);
 	}// readData
 
+	@Override
 	public String toString() {
 		return "WriteSingleRegisterResponse - Ref: " + getReference()
 				+ " Value: " + m_RegisterValue;

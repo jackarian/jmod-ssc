@@ -29,22 +29,27 @@ public abstract class SynchronizedAbstractRegister implements Register {
 	 */
 	protected byte[] m_Register = new byte[2];
 
+	@Override
 	public int getValue() {
 		return ((m_Register[0] & 0xff) << 8 | (m_Register[1] & 0xff));
 	}// getValue
 
+	@Override
 	public final int toUnsignedShort() {
 		return ((m_Register[0] & 0xff) << 8 | (m_Register[1] & 0xff));
 	}// toUnsignedShort
 
+	@Override
 	public final synchronized void setValue(int v) {
 		setValue((short) v);
 	}// setValue
 
+	@Override
 	public final short toShort() {
 		return (short) ((m_Register[0] << 8) | (m_Register[1] & 0xff));
 	}// toShort
 
+	@Override
 	public final synchronized void setValue(short s) {
 		if (m_Register == null) {
 			m_Register = new byte[2];
@@ -53,6 +58,7 @@ public abstract class SynchronizedAbstractRegister implements Register {
 		m_Register[1] = (byte) (0xff & s);
 	}// setValue
 
+	@Override
 	public final synchronized void setValue(byte[] bytes) {
 		if (bytes.length < 2) {
 			throw new IllegalArgumentException();
@@ -62,6 +68,7 @@ public abstract class SynchronizedAbstractRegister implements Register {
 		}
 	}// setValue
 
+	@Override
 	public byte[] toBytes() {
 		return m_Register;
 	}// toBytes

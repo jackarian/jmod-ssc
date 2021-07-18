@@ -31,10 +31,12 @@ public class ObservableDigitalOut extends Observable implements DigitalOut {
 	 */
 	protected boolean m_Set;
 
+	@Override
 	public boolean isSet() {
 		return m_Set;
 	}// isSet
 
+	@Override
 	public void set(boolean b) {
 		m_Set = b;
 		notifyObservers("value");

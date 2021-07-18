@@ -72,6 +72,7 @@ public final class ReadInputRegistersRequest extends ModbusRequest {
 		setWordCount(count);
 	}// constructor
 
+	@Override
 	public ModbusResponse createResponse() {
 		ReadInputRegistersResponse response = null;
 		InputRegister[] inpregs = null;
@@ -108,6 +109,7 @@ public final class ReadInputRegistersRequest extends ModbusRequest {
 	 * @param ref
 	 *            the reference of the register to start reading from.
 	 */
+	@Override
 	public void setReference(int ref) {
 		m_Reference = ref;
 		// setChanged(true);
@@ -121,6 +123,7 @@ public final class ReadInputRegistersRequest extends ModbusRequest {
 	 * @return the reference of the register to start reading from as
 	 *         <tt>int</tt>.
 	 */
+	@Override
 	public int getReference() {
 		return m_Reference;
 	}// getReference
@@ -149,16 +152,19 @@ public final class ReadInputRegistersRequest extends ModbusRequest {
 		return m_WordCount;
 	}// getWordCount
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeShort(m_Reference);
 		dout.writeShort(m_WordCount);
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 		m_Reference = din.readUnsignedShort();
 		m_WordCount = din.readUnsignedShort();
 	}// readData
 
+	@Override
 	public String toString() {
 		return "ReadInputRegistersRequest - Ref: " + m_Reference + " Words: "
 				+ m_WordCount;

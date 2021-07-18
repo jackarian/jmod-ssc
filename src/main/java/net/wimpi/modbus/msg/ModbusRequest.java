@@ -116,6 +116,7 @@ public abstract class ModbusRequest extends ModbusMessageImpl {
 		return request;
 	}// createModbusRequest
 
+	@Override
 	public abstract int getReference();
 
 }// class ModbusRequest

@@ -54,15 +54,17 @@ public class ModbusUDPTransport implements ModbusTransport {
 		m_ByteIn = new BytesInputStream(Modbus.MAX_IP_MESSAGE_LENGTH);
 	}// constructor
 
+	@Override
 	public void close() throws IOException {
 		// ?
 	}// close
 
+	@Override
 	public void writeMessage(ModbusMessage msg) throws ModbusIOException {
 		try {
 			synchronized (m_ByteOut) {
 				m_ByteOut.reset();
-				msg.writeTo((DataOutput) m_ByteOut);
+				msg.writeTo(m_ByteOut);
 				m_Terminal.sendMessage(m_ByteOut.toByteArray());
 			}
 		} catch (Exception ex) {
@@ -70,6 +72,7 @@ public class ModbusUDPTransport implements ModbusTransport {
 		}
 	}// write
 
+	@Override
 	public ModbusRequest readRequest() throws ModbusIOException {
 		try {
 			ModbusRequest req = null;
@@ -87,6 +90,7 @@ public class ModbusUDPTransport implements ModbusTransport {
 		}
 	}// readRequest
 
+	@Override
 	public ModbusResponse readResponse() throws ModbusIOException {
 
 		try {

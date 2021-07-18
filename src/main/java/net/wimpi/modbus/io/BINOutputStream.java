@@ -55,6 +55,7 @@ public class BINOutputStream extends FilterOutputStream {
 	 * @throws java.io.IOException
 	 *             if an I/O error occurs.
 	 */
+	@Override
 	public void write(int b) throws IOException {
 		if (b == ModbusASCIITransport.FRAME_START) {
 			out.write(ModbusBINTransport.FRAME_START_TOKEN);
@@ -78,6 +79,7 @@ public class BINOutputStream extends FilterOutputStream {
 	 * @throws java.io.IOException
 	 *             if an I/O error occurs.
 	 */
+	@Override
 	public void write(byte[] data) throws IOException {
 		for (int i = 0; i < data.length; i++) {
 			write(data[i]);
@@ -98,6 +100,7 @@ public class BINOutputStream extends FilterOutputStream {
 	 * @throws java.io.IOException
 	 *             if an I/O error occurs.
 	 */
+	@Override
 	public void write(byte[] data, int off, int len) throws IOException {
 		for (int i = off; i < len; i++) {
 			write(data[i]);

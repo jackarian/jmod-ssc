@@ -149,6 +149,7 @@ public final class ReadInputRegistersResponse extends ModbusResponse {
 		return m_Registers;
 	}// getRegisters
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeByte(m_ByteCount);
 		for (int k = 0; k < getWordCount(); k++) {
@@ -156,6 +157,7 @@ public final class ReadInputRegistersResponse extends ModbusResponse {
 		}
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 		setByteCount(din.readUnsignedByte());
 
@@ -171,6 +173,7 @@ public final class ReadInputRegistersResponse extends ModbusResponse {
 		setDataLength(getByteCount() + 1);
 	}// readData
 
+	@Override
 	public String toString() {
 		return "ReadInputRegisterResponse - Words: " + getWordCount();
 	}

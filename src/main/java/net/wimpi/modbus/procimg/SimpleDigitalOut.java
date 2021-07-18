@@ -49,10 +49,12 @@ public class SimpleDigitalOut implements DigitalOut {
 		set(b);
 	}// constructor(boolean)
 
+	@Override
 	public boolean isSet() {
 		return m_Set;
 	}// isSet
 
+	@Override
 	public synchronized void set(boolean b) {
 		m_Set = b;
 	}// set

@@ -213,6 +213,7 @@ public final class BitVector {
 	 * 
 	 * @return a <tt>String</tt> representing this <tt>BitVector</tt>.
 	 */
+	@Override
 	public String toString() {
 		StringBuffer sbuf = new StringBuffer();
 		for (int i = 0; i < size(); i++) {

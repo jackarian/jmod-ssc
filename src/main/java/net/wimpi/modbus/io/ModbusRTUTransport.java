@@ -47,6 +47,7 @@ public class ModbusRTUTransport extends ModbusSerialTransport {
 	private BytesOutputStream m_ByteOut; // write frames
 	private byte[] lastRequest = null;
 
+	@Override
 	public void writeMessage(ModbusMessage msg) throws ModbusIOException {
 		try {
 			int len;
@@ -87,6 +88,7 @@ public class ModbusRTUTransport extends ModbusSerialTransport {
 	}// writeMessage
 
 	// This is required for the slave that is not supported
+	@Override
 	public ModbusRequest readRequest() throws ModbusIOException {
 		throw new RuntimeException("Operation not supported.");
 	} // readRequest
@@ -107,6 +109,7 @@ public class ModbusRTUTransport extends ModbusSerialTransport {
 		}
 	}// cleanInput
 
+	@Override
 	public ModbusResponse readResponse() throws ModbusIOException {
 
 		boolean done = false;
@@ -193,6 +196,7 @@ public class ModbusRTUTransport extends ModbusSerialTransport {
 	 * @throws IOException
 	 *             if an I\O error occurs.
 	 */
+	@Override
 	public void prepareStreams(SerialInputStream in, SerialOutputStream out) {
 		m_InputStream = in;
 		m_OutputStream = out;
@@ -203,6 +207,7 @@ public class ModbusRTUTransport extends ModbusSerialTransport {
 		m_ByteInOut = new BytesOutputStream(m_InBuffer);
 	} // prepareStreams
 
+	@Override
 	public void close() throws IOException {
 		m_InputStream.close();
 		m_OutputStream.close();

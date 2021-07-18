@@ -29,6 +29,7 @@ public class DefaultProcessImageFactory implements ProcessImageFactory {
 	 * 
 	 * @return a SimpleProcessImage instance.
 	 */
+	@Override
 	public ProcessImageImplementation createProcessImageImplementation() {
 		return new SimpleProcessImage();
 	}// createProcessImageImplementation
@@ -38,6 +39,7 @@ public class DefaultProcessImageFactory implements ProcessImageFactory {
 	 * 
 	 * @return a SimpleDigitalIn instance.
 	 */
+	@Override
 	public DigitalIn createDigitalIn() {
 		return new SimpleDigitalIn();
 	}// createDigitalIn
@@ -49,6 +51,7 @@ public class DefaultProcessImageFactory implements ProcessImageFactory {
 	 *            true if set, false otherwise.
 	 * @return a SimpleDigitalIn instance.
 	 */
+	@Override
 	public DigitalIn createDigitalIn(boolean state) {
 		return new SimpleDigitalIn(state);
 	}// createDigitalIn
@@ -58,6 +61,7 @@ public class DefaultProcessImageFactory implements ProcessImageFactory {
 	 * 
 	 * @return a SimpleDigitalOut instance.
 	 */
+	@Override
 	public DigitalOut createDigitalOut() {
 		return new SimpleDigitalOut();
 	}// createDigitalOut
@@ -69,6 +73,7 @@ public class DefaultProcessImageFactory implements ProcessImageFactory {
 	 *            true if set, false otherwise.
 	 * @return a SimpleDigitalOut instance.
 	 */
+	@Override
 	public DigitalOut createDigitalOut(boolean b) {
 		return new SimpleDigitalOut(b);
 	}// createDigitalOut
@@ -78,6 +83,7 @@ public class DefaultProcessImageFactory implements ProcessImageFactory {
 	 * 
 	 * @return a SimpleInputRegister instance.
 	 */
+	@Override
 	public InputRegister createInputRegister() {
 		return new SimpleInputRegister();
 	}// createSimpleInputRegister
@@ -91,6 +97,7 @@ public class DefaultProcessImageFactory implements ProcessImageFactory {
 	 *            the second <tt>byte</tt>.
 	 * @return an InputRegister instance.
 	 */
+	@Override
 	public InputRegister createInputRegister(byte b1, byte b2) {
 		return new SimpleInputRegister(b1, b2);
 	}// createInputRegister
@@ -100,6 +107,7 @@ public class DefaultProcessImageFactory implements ProcessImageFactory {
 	 * 
 	 * @return a SimpleRegister instance.
 	 */
+	@Override
 	public Register createRegister() {
 		return new SimpleRegister();
 	}// createRegister
@@ -113,6 +121,7 @@ public class DefaultProcessImageFactory implements ProcessImageFactory {
 	 *            the second <tt>byte</tt>.
 	 * @return a Register instance.
 	 */
+	@Override
 	public Register createRegister(byte b1, byte b2) {
 		return new SimpleRegister(b1, b2);
 	}// createRegister
