@@ -320,6 +320,17 @@ public final class ModbusUtil {
 				.intBitsToFloat((((bytes[0] & 0xff) << 24)
 						| ((bytes[1] & 0xff) << 16) | ((bytes[2] & 0xff) << 8) | (bytes[3] & 0xff)));
 	}// registersToFloat
+	/**
+	 * Converts a byte[4] binary float value to a float primitive.
+	 * 
+	 * @param bytes
+	 *            the byte[4] containing the float value.
+	 * @return a float value.
+	 */
+	public static final float registersToFloat2(byte[] bytes) {
+		return Float
+				.intBitsToFloat(((bytes[0] & 0xff) << 8) | (bytes[1] & 0xff));
+	}// registersToFloat
 
 	/**
 	 * Converts a float value to a byte[4] binary float value.

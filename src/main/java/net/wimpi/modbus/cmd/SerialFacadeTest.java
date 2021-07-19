@@ -41,6 +41,8 @@ package net.wimpi.modbus.cmd;
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusException;
 import net.wimpi.modbus.facade.ModbusSerialMaster;
+import net.wimpi.modbus.io.ORWE515.OrnoWE515AddressMapping;
+import net.wimpi.modbus.io.ORWE515.OrnoWE515Utils;
 import net.wimpi.modbus.io.sdm120M.SDMUtils;
 import net.wimpi.modbus.io.yotta.YottaProtocolAddressMapping;
 import net.wimpi.modbus.procimg.InputRegister;
@@ -104,30 +106,30 @@ public class SerialFacadeTest {
 			msm = new ModbusSerialMaster(params);
 			msm.connect();
 
-			slaveId= 6;
+			slaveId= 0;
 
 			BitVector value = new BitVector(8);
-			value.setBit(0, true);
-			value.setBit(1, true);
-			value.setBit(2, true);
-			value.setBit(3, true);
-			value.setBit(4, true);
-			value.setBit(5, true);
-			value.setBit(6, true);
-			value.setBit(7, true);
+			value.setBit(0, false);
+			value.setBit(1, false);
+			value.setBit(2, false);
+			value.setBit(3, false);
+			value.setBit(4, false);
+			value.setBit(5, false);
+			value.setBit(6, false);
+			value.setBit(7, false);
 
 			if (slaveId == 0||slaveId==1) {
 
-//				 msm.writeCoil(slaveId, 0x10, true); //OUTPUT 0
-//				 msm.writeCoil(slaveId, 0x11, true);// OUTPUT 1
-//				 msm.writeCoil(slaveId, 0x12, true);// OUTPUT 2
-//				 msm.writeCoil(slaveId, 0x13, true);// OUTPUT 3
-//				 msm.writeCoil(slaveId, 0x14, true);// OUTPUT 4
-//				 msm.writeCoil(slaveId, 0x15, true);// OUTPUT 5
-//				 msm.writeCoil(slaveId, 0x16, true);// OUTPUT 6
-//				 msm.writeCoil(slaveId, 0x17, true);// OUTPUT 7
+//				 msm.writeCoil(slaveId, 0x10, false); //OUTPUT 0
+//				 msm.writeCoil(slaveId, 0x11, false);// OUTPUT 1
+//				 msm.writeCoil(slaveId, 0x12, false);// OUTPUT 2
+//				 msm.writeCoil(slaveId, 0x13, false);// OUTPUT 3
+//				 msm.writeCoil(slaveId, 0x14, false);// OUTPUT 4
+//				 msm.writeCoil(slaveId, 0x15, false);// OUTPUT 5
+//				 msm.writeCoil(slaveId, 0x16, false);// OUTPUT 6
+//				 msm.writeCoil(slaveId, 0x17, false);// OUTPUT 7
 
-				//msm.writeMultipleCoils(slaveId, 0x10, value);
+				msm.writeMultipleCoils(slaveId, 0x10, value);
     			 
     			 
 				 InputRegister[] inputs = msm.readMultipleRegisters(slaveId, YottaProtocolAddressMapping.ModuleID.getAddress(),1);
@@ -144,7 +146,7 @@ public class SerialFacadeTest {
 			regs[0] = new SimpleInputRegister(0x4100);
 	
 
-			if (slaveId > 1) {
+			if (slaveId > 1&&slaveId!=5) {
 				
 					System.out.println("Tentativo lettura slave: " + slaveId);
 					try {
@@ -157,6 +159,18 @@ public class SerialFacadeTest {
 					}
 					Thread.sleep(2000);
 				//}
+			}
+			if(slaveId==5) {
+				System.out.println("Tentativo lettura slave: " + slaveId);
+				try {
+					   OrnoWE515Utils.printVoltage(msm, slaveId);
+			          
+
+				} catch (Exception e) {
+					System.out.println("Fallimento lettura slave: " + slaveId);
+					e.printStackTrace();
+				}
+				Thread.sleep(2000);
 			}
 
 			finished = true;
