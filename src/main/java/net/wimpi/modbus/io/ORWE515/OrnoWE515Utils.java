@@ -20,6 +20,17 @@ public class OrnoWE515Utils {
 		}
 	}
 	
+	public  static void printId(ModbusSerialMaster msm,int slaveId) throws ModbusException {
+		InputRegister[] inputs = null;
+		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.MeterID.getAddress(), 1);
+		
+		if (inputs != null) {
+			
+			Short test = ModbusUtil.registerToShort(buildBufferToReadForFloat(1, inputs));
+			System.out.println("Meater ID: " + test);
+		}
+	}
+	
 	public static byte[] buildBufferToReadForFloat(int dim,InputRegister[] inputs) {
 		byte[] buffer  = new byte[2];
 		byte[] low  = inputs[0].toBytes();

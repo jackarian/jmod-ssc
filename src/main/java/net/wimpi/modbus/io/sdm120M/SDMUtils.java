@@ -72,7 +72,7 @@ public class SDMUtils {
 	 * @param slaveId
 	 * @throws ModbusException
 	 */
-	public  static void printVoltage(ModbusSerialMaster msm,int slaveId) throws ModbusException {
+	public  static void printVoltage(int slaveId,ModbusSerialMaster msm) throws ModbusException {
 		InputRegister[] inputs = null;
 		inputs = msm.readInputRegisters(slaveId, SDMAddressMapping.Voltage.getAddress(), 2);
 		

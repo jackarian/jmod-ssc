@@ -21,12 +21,13 @@ import net.wimpi.modbus.ModbusIOException;
 import net.wimpi.modbus.msg.ModbusMessage;
 import net.wimpi.modbus.msg.ModbusRequest;
 import net.wimpi.modbus.msg.ModbusResponse;
+import net.wimpi.modbus.serial.SerialInputStream;
+import net.wimpi.modbus.serial.SerialOutputStream;
 import net.wimpi.modbus.util.ModbusUtil;
 
 import java.io.IOException;
 
-import jssc.SerialInputStream;
-import jssc.SerialOutputStream;
+
 
 /**
  * Class that implements the ModbusRTU transport flavor.

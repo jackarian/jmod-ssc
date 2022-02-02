@@ -57,10 +57,12 @@ public class SerialFacadeTest {
 	
 	
 	public static void main(String[] args) {
+		String osName = System.getProperty("os.name");
+		System.out.println("System :"+osName);
 		int inChar = -1;
 		int result = 0;
 		boolean finished = false;
-		int slaveId = 3;
+		int slaveId = 6;
 		String portname = null;
 		ModbusSerialMaster msm = null;
 
@@ -106,7 +108,7 @@ public class SerialFacadeTest {
 			msm = new ModbusSerialMaster(params);
 			msm.connect();
 
-			slaveId= 0;
+			slaveId= 6;
 
 			BitVector value = new BitVector(8);
 			value.setBit(0, false);
@@ -114,13 +116,13 @@ public class SerialFacadeTest {
 			value.setBit(2, false);
 			value.setBit(3, false);
 			value.setBit(4, false);
-			value.setBit(5, false);
-			value.setBit(6, false);
-			value.setBit(7, false);
+			value.setBit(5, true);
+			value.setBit(6, true);
+			value.setBit(7, true);
 
-			if (slaveId == 0||slaveId==1) {
+			if (slaveId == 0) {
 
-//				 msm.writeCoil(slaveId, 0x10, false); //OUTPUT 0
+				 msm.writeCoil(slaveId, 0x10, true); //OUTPUT 0
 //				 msm.writeCoil(slaveId, 0x11, false);// OUTPUT 1
 //				 msm.writeCoil(slaveId, 0x12, false);// OUTPUT 2
 //				 msm.writeCoil(slaveId, 0x13, false);// OUTPUT 3
@@ -146,11 +148,11 @@ public class SerialFacadeTest {
 			regs[0] = new SimpleInputRegister(0x4100);
 	
 
-			if (slaveId > 1&&slaveId!=5) {
+			if (slaveId > 0&&slaveId!=5) {
 				
 					System.out.println("Tentativo lettura slave: " + slaveId);
 					try {
-						   SDMUtils.printVoltage(msm, slaveId);
+						   SDMUtils.printVoltage(slaveId,msm);
 				           SDMUtils.leggMeterId(slaveId, msm);
 
 					} catch (Exception e) {
@@ -164,7 +166,7 @@ public class SerialFacadeTest {
 				System.out.println("Tentativo lettura slave: " + slaveId);
 				try {
 					   OrnoWE515Utils.printVoltage(msm, slaveId);
-			          
+					   OrnoWE515Utils.printId(msm, slaveId);
 
 				} catch (Exception e) {
 					System.out.println("Fallimento lettura slave: " + slaveId);
