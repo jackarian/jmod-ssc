@@ -85,12 +85,12 @@ public class SerialFacadeTest {
 			System.out.println(" sending test messages to slave: " + slaveId);
 			System.out.println("net.wimpi.modbus.debug set to: " + System.getProperty("net.wimpi.modbus.debug"));
 
-			System.out.println("Hit enter to start and <s enter> to terminate the test.");
-			inChar = System.in.read();
-			if ((inChar == 's') || (inChar == 'S')) {
-				System.out.println("Exiting");
-				System.exit(0);
-			}
+//			System.out.println("Hit enter to start and <s enter> to terminate the test.");
+//			inChar = System.in.read();
+//			if ((inChar == 's') || (inChar == 'S')) {
+//				System.out.println("Exiting");
+//				System.exit(0);
+//			}
 
 			// 2. Setup serial parameters
 			SerialParameters params = new SerialParameters();
@@ -99,8 +99,9 @@ public class SerialFacadeTest {
 			params.setDatabits(8);
 			params.setParity("None");
 			params.setStopbits(1);
-			params.setEncoding("rtu");
+			params.setEncoding("rtu");			
 			params.setEcho(false);
+			
 			if (Modbus.debug)
 				System.out.println("Encoding [" + params.getEncoding() + "]");
 
@@ -153,7 +154,10 @@ public class SerialFacadeTest {
 					System.out.println("Tentativo lettura slave: " + slaveId);
 					try {
 						   SDMUtils.printVoltage(slaveId,msm);
+						   SDMUtils.printCurrent(slaveId,msm);
+						   SDMUtils.printWatts(slaveId,msm);
 				           SDMUtils.leggMeterId(slaveId, msm);
+				           SDMUtils.printAllValue(slaveId, msm);
 
 					} catch (Exception e) {
 						System.out.println("Fallimento lettura slave: " + slaveId);
