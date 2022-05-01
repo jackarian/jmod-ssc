@@ -22,6 +22,7 @@ public enum OrnoWE515AddressMapping {
 	OrnoWE515AddressMapping(int i,int nuymByte
 			) {
 		this.address = i;
+		this.numByte =nuymByte;
 	}
 
 	public int getAddress() {

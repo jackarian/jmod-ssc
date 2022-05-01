@@ -13,7 +13,8 @@ public class OrnoWE515Utils {
 	
 	public  static void printVoltage(ModbusSerialMaster msm,int slaveId) throws ModbusException {
 		InputRegister[] inputs = null;
-		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.Voltage.getAddress(), 1);
+		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.Voltage.getAddress(), 
+				  OrnoWE515AddressMapping.Voltage.getNumByte());
 		
 		if (inputs != null) {
 			
@@ -24,7 +25,7 @@ public class OrnoWE515Utils {
 	
 	public  static void printId(ModbusSerialMaster msm,int slaveId) throws ModbusException {
 		InputRegister[] inputs = null;
-		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.MeterID.getAddress(), 1);
+		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.CurrentPhase1.getAddress(), 1);
 		
 		if (inputs != null) {
 			
