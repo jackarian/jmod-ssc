@@ -8,7 +8,9 @@ import net.wimpi.modbus.util.ModbusUtil;
 
 public class OrnoWE515Utils {
 
-	private static float factor=0.01f;
+	private static float factorVoltage=0.01f;
+	private static float factorCurrent=0.001f;
+	
 	public  static void printVoltage(ModbusSerialMaster msm,int slaveId) throws ModbusException {
 		InputRegister[] inputs = null;
 		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.Voltage.getAddress(), 1);
@@ -16,7 +18,7 @@ public class OrnoWE515Utils {
 		if (inputs != null) {
 			
 			float test = ModbusUtil.registerToShort(buildBufferToReadForFloat(1, inputs));
-			System.out.println("Valore Volt: " + test*factor);
+			System.out.println("Valore Volt: " + test*factorVoltage);
 		}
 	}
 	

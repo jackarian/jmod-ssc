@@ -109,7 +109,7 @@ public class SerialFacadeTest {
 			msm = new ModbusSerialMaster(params);
 			msm.connect();
 
-			slaveId= 6;
+			slaveId= 5;
 
 			BitVector value = new BitVector(8);
 			value.setBit(0, false);
