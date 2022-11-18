@@ -170,7 +170,7 @@ public class SerialFacadeTest {
 				System.out.println("Tentativo lettura slave: " + slaveId);
 				try {
 					   OrnoWE515Utils.printVoltage(msm, slaveId);
-					   OrnoWE515Utils.printId(msm, slaveId);
+					   OrnoWE515Utils.printCurrent(msm, slaveId);
 
 				} catch (Exception e) {
 					System.out.println("Fallimento lettura slave: " + slaveId);

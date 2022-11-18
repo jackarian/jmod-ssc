@@ -28,7 +28,7 @@ public interface Modbus {
 	 * JVM flag for debug mode. Can be set passing the system property
 	 * net.wimpi.modbus.debug=false|true (-D flag to the jvm).
 	 */
-	public static final boolean debug = true;
+	public static final boolean debug = false;
 
 	/**
 	 * Defines the class 0 function code for <tt>read multiple registers</tt>.
