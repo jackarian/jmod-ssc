@@ -72,6 +72,7 @@ public final class WriteSingleRegisterRequest extends ModbusRequest {
 		setDataLength(4);
 	}// constructor
 
+	@Override
 	public ModbusResponse createResponse() {
 		WriteSingleRegisterResponse response = null;
 		Register reg = null;
@@ -108,6 +109,7 @@ public final class WriteSingleRegisterRequest extends ModbusRequest {
 	 * @param ref
 	 *            the reference of the register to be written to.
 	 */
+	@Override
 	public void setReference(int ref) {
 		m_Reference = ref;
 		// setChanged(true);
@@ -120,6 +122,7 @@ public final class WriteSingleRegisterRequest extends ModbusRequest {
 	 * 
 	 * @return the reference of the register to be written to.
 	 */
+	@Override
 	public int getReference() {
 		return m_Reference;
 	}// getReference
@@ -147,17 +150,20 @@ public final class WriteSingleRegisterRequest extends ModbusRequest {
 		return m_Register;
 	}// getRegister
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeShort(m_Reference);
 		dout.write(m_Register.toBytes(), 0, 2);
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 		m_Reference = din.readUnsignedShort();
 		m_Register = ModbusCoupler.getReference().getProcessImageFactory()
 				.createRegister(din.readByte(), din.readByte());
 	}// readData
 
+	@Override
 	public String toString() {
 		return "WriteSingleRegisterRequest - Ref: " + m_Reference + " Value: "
 				+ m_Register.getValue();

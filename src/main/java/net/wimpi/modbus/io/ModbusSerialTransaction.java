@@ -98,34 +98,42 @@ public class ModbusSerialTransaction implements ModbusTransaction {
 		m_IO = con.getModbusTransport();
 	}// setConnection
 
+	@Override
 	public int getTransactionID() {
 		return c_TransactionID.get();
 	}// getTransactionID
 
+	@Override
 	public void setRequest(ModbusRequest req) {
 		m_Request = req;
 	}// setRequest
 
+	@Override
 	public ModbusRequest getRequest() {
 		return m_Request;
 	}// getRequest
 
+	@Override
 	public ModbusResponse getResponse() {
 		return m_Response;
 	}// getResponse
 
+	@Override
 	public void setCheckingValidity(boolean b) {
 		m_ValidityCheck = b;
 	}// setCheckingValidity
 
+	@Override
 	public boolean isCheckingValidity() {
 		return m_ValidityCheck;
 	}// isCheckingValidity
 
+	@Override
 	public int getRetries() {
 		return m_Retries;
 	}// getRetries
 
+	@Override
 	public void setRetries(int num) {
 		m_Retries = num;
 	}// setRetries
@@ -149,6 +157,7 @@ public class ModbusSerialTransaction implements ModbusTransaction {
 		this.m_TransDelayMS = newTransDelayMS;
 	}
 
+	@Override
 	public void execute() throws ModbusIOException, ModbusSlaveException,
 			ModbusException {
 		// 1. assert executeability

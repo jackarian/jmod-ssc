@@ -83,14 +83,17 @@ public class ExceptionResponse extends ModbusResponse {
 		return m_ExceptionCode;
 	}// getExceptionCode
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeByte(getExceptionCode());
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 		m_ExceptionCode = din.readUnsignedByte();
 	}// readData
 
+	@Override
 	public String toString() {
 		return "ExceptionResponse - Exception code: " + m_ExceptionCode;
 	}

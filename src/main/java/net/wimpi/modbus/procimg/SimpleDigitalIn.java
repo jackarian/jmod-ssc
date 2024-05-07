@@ -49,6 +49,7 @@ public class SimpleDigitalIn implements DigitalIn {
 		set(b);
 	}// constructor(boolean)
 
+	@Override
 	public boolean isSet() {
 		return m_Set;
 	}// isSet

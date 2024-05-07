@@ -88,10 +88,10 @@ public final class ModbusUtil {
 		StringBuffer buf = new StringBuffer(data.length * 2);
 		for (int i = off; i < length; i++) {
 			// don't forget the second hex digit
-			if (((int) data[i] & 0xff) < 0x10) {
+			if ((data[i] & 0xff) < 0x10) {
 				buf.append("0");
 			}
-			buf.append(Long.toString((int) data[i] & 0xff, 16));
+			buf.append(Long.toString(data[i] & 0xff, 16));
 			if (i < data.length - 1) {
 				buf.append(" ");
 			}
@@ -111,10 +111,10 @@ public final class ModbusUtil {
 	public static final byte[] toHex(int i) {
 		StringBuffer buf = new StringBuffer(2);
 		// don't forget the second hex digit
-		if (((int) i & 0xff) < 0x10) {
+		if ((i & 0xff) < 0x10) {
 			buf.append("0");
 		}
-		buf.append(Long.toString((int) i & 0xff, 16).toUpperCase());
+		buf.append(Long.toString(i & 0xff, 16).toUpperCase());
 		return buf.toString().getBytes();
 	}// toHex
 
@@ -285,7 +285,7 @@ public final class ModbusUtil {
 				| ((long) (bytes[3] & 0xff) << 32)
 				| ((long) (bytes[4] & 0xff) << 24)
 				| ((long) (bytes[5] & 0xff) << 16)
-				| ((long) (bytes[6] & 0xff) << 8) | ((long) (bytes[7] & 0xff))));
+				| ((long) (bytes[6] & 0xff) << 8) | (bytes[7] & 0xff)));
 	}// registersToLong
 
 	/**
@@ -320,6 +320,17 @@ public final class ModbusUtil {
 				.intBitsToFloat((((bytes[0] & 0xff) << 24)
 						| ((bytes[1] & 0xff) << 16) | ((bytes[2] & 0xff) << 8) | (bytes[3] & 0xff)));
 	}// registersToFloat
+	/**
+	 * Converts a byte[4] binary float value to a float primitive.
+	 * 
+	 * @param bytes
+	 *            the byte[4] containing the float value.
+	 * @return a float value.
+	 */
+	public static final float registersToFloat2(byte[] bytes) {
+		return Float
+				.intBitsToFloat(((bytes[0] & 0xff) << 8) | (bytes[1] & 0xff));
+	}// registersToFloat
 
 	/**
 	 * Converts a float value to a byte[4] binary float value.
@@ -347,7 +358,7 @@ public final class ModbusUtil {
 						| ((long) (bytes[3] & 0xff) << 32)
 						| ((long) (bytes[4] & 0xff) << 24)
 						| ((long) (bytes[5] & 0xff) << 16)
-						| ((long) (bytes[6] & 0xff) << 8) | ((long) (bytes[7] & 0xff)))));
+						| ((long) (bytes[6] & 0xff) << 8) | (bytes[7] & 0xff))));
 	}// registersToDouble
 
 	/**
@@ -369,7 +380,7 @@ public final class ModbusUtil {
 	 * @return an integer containing the unsigned byte value.
 	 */
 	public static final int unsignedByteToInt(byte b) {
-		return (int) b & 0xFF;
+		return b & 0xFF;
 	}// unsignedByteToInt
 
 	/**
@@ -435,7 +446,7 @@ public final class ModbusUtil {
 		int uIndex; /* will index into CRC lookup *//* table */
 		/* pass through message buffer */
 		for (int i = offset; i < len && i < data.length; i++) {
-			nextByte = 0xFF & ((int) data[i]);
+			nextByte = 0xFF & (data[i]);
 			uIndex = crc[0] ^ nextByte; // *puchMsg++; /* calculate the CRC */
 			crc[0] = crc[1] ^ auchCRCHi[uIndex];
 			crc[1] = auchCRCLo[uIndex];
@@ -447,10 +458,10 @@ public final class ModbusUtil {
 	public static final int calculateLRC(byte[] data, int off, int len) {
 		int lrc = 0;
 		for (int i = off; i < len; i++) {
-			lrc += (int) data[i] & 0xff; // calculate with unsigned bytes
+			lrc += data[i] & 0xff; // calculate with unsigned bytes
 		}
 		lrc = (lrc ^ 0xff) + 1; // two's complement
-		return (int) ((byte) lrc) & 0xff;
+		return ((byte) lrc) & 0xff;
 	}// calculateLRC
 
 	/* Table of CRC values for high-order byte */

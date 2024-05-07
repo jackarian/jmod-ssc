@@ -72,6 +72,7 @@ public final class WriteCoilRequest extends ModbusRequest {
 		setCoil(b);
 	}// constructor
 
+	@Override
 	public ModbusResponse createResponse() {
 		WriteCoilResponse response = null;
 		DigitalOut dout = null;
@@ -110,6 +111,7 @@ public final class WriteCoilRequest extends ModbusRequest {
 	 * @param ref
 	 *            the reference of the coil's register.
 	 */
+	@Override
 	public void setReference(int ref) {
 		m_Reference = ref;
 		// setChanged(true);
@@ -122,6 +124,7 @@ public final class WriteCoilRequest extends ModbusRequest {
 	 * 
 	 * @return the reference of the coil's register.
 	 */
+	@Override
 	public int getReference() {
 		return m_Reference;
 	}// getReference
@@ -150,6 +153,7 @@ public final class WriteCoilRequest extends ModbusRequest {
 		return m_Coil;
 	}// getCoil
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeShort(m_Reference);
 		if (m_Coil) {
@@ -159,6 +163,7 @@ public final class WriteCoilRequest extends ModbusRequest {
 		}
 	}
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 		m_Reference = din.readUnsignedShort();
 		if (din.readByte() == Modbus.COIL_ON) {
@@ -170,6 +175,7 @@ public final class WriteCoilRequest extends ModbusRequest {
 		din.readByte();
 	}// readData
 
+	@Override
 	public String toString() {
 		return "WriteCoilRequest - Ref: " + m_Reference + " coil: " + m_Coil;
 	}

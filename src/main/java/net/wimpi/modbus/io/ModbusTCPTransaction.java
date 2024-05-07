@@ -99,26 +99,32 @@ public class ModbusTCPTransaction implements ModbusTransaction {
 		m_IO = con.getModbusTransport();
 	}// setConnection
 
+	@Override
 	public void setRequest(ModbusRequest req) {
 		m_Request = req;
 	}// setRequest
 
+	@Override
 	public ModbusRequest getRequest() {
 		return m_Request;
 	}// getRequest
 
+	@Override
 	public ModbusResponse getResponse() {
 		return m_Response;
 	}// getResponse
 
+	@Override
 	public int getTransactionID() {
 		return c_TransactionID.get();
 	}// getTransactionID
 
+	@Override
 	public void setCheckingValidity(boolean b) {
 		m_ValidityCheck = b;
 	}// setCheckingValidity
 
+	@Override
 	public boolean isCheckingValidity() {
 		return m_ValidityCheck;
 	}// isCheckingValidity
@@ -146,14 +152,17 @@ public class ModbusTCPTransaction implements ModbusTransaction {
 		return m_Reconnecting;
 	}// isReconnecting
 
+	@Override
 	public int getRetries() {
 		return m_Retries;
 	}// getRetries
 
+	@Override
 	public void setRetries(int num) {
 		m_Retries = num;
 	}// setRetries
 
+	@Override
 	public void execute() throws ModbusIOException, ModbusSlaveException,
 			ModbusException {
 

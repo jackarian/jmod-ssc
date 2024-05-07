@@ -24,6 +24,7 @@ import net.wimpi.modbus.io.ModbusTCPTransaction;
 import net.wimpi.modbus.msg.*;
 import net.wimpi.modbus.net.TCPMasterConnection;
 import net.wimpi.modbus.procimg.Register;
+import net.wimpi.modbus.util.BitVector;
 
 
 /**
@@ -36,16 +37,18 @@ import net.wimpi.modbus.procimg.Register;
  */
 public class TCPMasterTest {
 
-	private static int requestNumber = 0;
+	private static int requestNumber = 1;
+	
+	private static String SLAVE_ADDRESS ="192.168.2.192";
 	
 	public static void main(String[] args) {
 		int port = Modbus.DEFAULT_PORT;
-		int unitId = 15; //Same as TCPSlaveTest.java
+		int unitId = 1; 
 		try {
 			if (args != null && args.length == 1) {
 				port = Integer.parseInt(args[0]);
 			}
-			InetAddress addy = InetAddress.getLocalHost();
+			InetAddress addy = InetAddress.getByName("192.168.2.192");
 			TCPMasterConnection connection = new TCPMasterConnection(addy);
 			connection.setTimeout(3000);
 			connection.setPort(port);
@@ -55,29 +58,45 @@ public class TCPMasterTest {
 			ModbusTCPTransaction transaction = new ModbusTCPTransaction(connection);
 			
 			ModbusRequest request;
-			while ((request = getNextRequest()) != null) {
+			requestNumber = 1;
+			
+			//if((request = getNextRequest()) != null) {
+			    request = writeSingleCoil(0x00, false);
 				request.setUnitID(unitId);
 				transaction.setRequest(request);
 				transaction.execute();
-				ModbusResponse response = transaction.getResponse();
+				ModbusResponse response = transaction.getResponse();				
 				gotResponse(response);
-			}
+				request = writeSingleCoil(0x01, false);
+				request.setUnitID(unitId);
+				transaction.setRequest(request);
+				transaction.execute();
+				 response = transaction.getResponse();				
+				gotResponse(response);
+				request = writeSingleCoil(0x02, false);
+				request.setUnitID(unitId);
+				transaction.setRequest(request);
+				transaction.execute();
+				response = transaction.getResponse();				
+				gotResponse(response);
+			//}
+			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	private static void gotResponse(ModbusResponse response) {
-		System.out.println("Got response: "+response.toString());
+		System.out.println("Got response: "+ModbusResponse.createModbusResponse(response.getFunctionCode()));
 	}
 
 	private static ModbusRequest getNextRequest() {
 		//Note: simple process image uses 0-based register addresses
-		switch (requestNumber++) {
+		switch (requestNumber) {
 		case 0:
-			return new WriteCoilRequest(0,true);
+			return new WriteCoilRequest(0X00,false);
 		case 1:
-			return new ReadCoilsRequest(0, 2);
+			return new ReadCoilsRequest(0x00, 1);
 		case 2:
 			return new ReadInputDiscretesRequest(0,4);
 		case 3:
@@ -95,4 +114,19 @@ public class TCPMasterTest {
 		}
 	}
 	
+	public static ModbusRequest writeSingleCoil(int address,boolean value) {
+		return new WriteCoilRequest(address,value);
+	}
+	
+	public static ModbusRequest writeMultipleCoils(int address,byte[] value) {
+		
+		WriteMultipleCoilsRequest req = new WriteMultipleCoilsRequest();	
+		BitVector vb  = new BitVector(value.length);
+		vb.setBytes(value);
+		req.setReference(address);
+		req.setCoils(vb);
+		
+		return req;
+		
+	}
 }

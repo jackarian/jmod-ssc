@@ -68,10 +68,12 @@ class UDPSlaveTerminal implements UDPTerminal {
 		m_Requests = new Hashtable<Integer, DatagramPacket>(342);
 	}// constructor
 
+	@Override
 	public InetAddress getLocalAddress() {
 		return m_LocalAddress;
 	}// getLocalAddress
 
+	@Override
 	public int getLocalPort() {
 		return m_LocalPort;
 	}// getLocalPort
@@ -85,6 +87,7 @@ class UDPSlaveTerminal implements UDPTerminal {
 	 * 
 	 * @return <tt>true</tt> if active, <tt>false</tt> otherwise.
 	 */
+	@Override
 	public boolean isActive() {
 		return m_Active;
 	}// isActive
@@ -95,6 +98,7 @@ class UDPSlaveTerminal implements UDPTerminal {
 	 * @throws Exception
 	 *             if there is a network failure.
 	 */
+	@Override
 	public synchronized void activate() throws Exception {
 		if (!isActive()) {
 			if (Modbus.debug)
@@ -139,6 +143,7 @@ class UDPSlaveTerminal implements UDPTerminal {
 	/**
 	 * Deactivates this <tt>UDPSlaveTerminal</tt>.
 	 */
+	@Override
 	public void deactivate() {
 		try {
 			if (m_Active) {
@@ -164,6 +169,7 @@ class UDPSlaveTerminal implements UDPTerminal {
 	 * 
 	 * @return the connection's <tt>ModbusTransport</tt>.
 	 */
+	@Override
 	public ModbusUDPTransport getModbusTransport() {
 		return m_ModbusTransport;
 	}// getModbusTransport
@@ -209,10 +215,12 @@ class UDPSlaveTerminal implements UDPTerminal {
 		m_Socket = sock;
 	}// setSocket
 
+	@Override
 	public void sendMessage(byte[] msg) throws Exception {
 		m_SendQueue.put(msg);
 	}// sendPackage
 
+	@Override
 	public byte[] receiveMessage() throws Exception {
 		return (byte[]) m_ReceiveQueue.take();
 	}// receiveMessage
@@ -225,12 +233,13 @@ class UDPSlaveTerminal implements UDPTerminal {
 			m_Continue = true;
 		}// constructor
 
+		@Override
 		public void run() {
 			do {
 				try {
 					// 1. pickup the message and corresponding request
 					byte[] message = (byte[]) m_SendQueue.take();
-					DatagramPacket req = (DatagramPacket) m_Requests
+					DatagramPacket req = m_Requests
 							.remove(new Integer(ModbusUtil
 									.registersToInt(message)));
 					// 2. create new Package with corresponding address and port
@@ -259,6 +268,7 @@ class UDPSlaveTerminal implements UDPTerminal {
 			m_Continue = true;
 		}// constructor
 
+		@Override
 		public void run() {
 			do {
 				try {

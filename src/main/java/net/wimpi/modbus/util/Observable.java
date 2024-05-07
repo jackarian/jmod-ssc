@@ -94,7 +94,7 @@ public class Observable {
 	public void notifyObservers(Object arg) {
 		synchronized (m_Observers) {
 			for (int i = 0; i < m_Observers.size(); i++) {
-				((Observer) m_Observers.elementAt(i)).update(this, arg);
+				m_Observers.elementAt(i).update(this, arg);
 			}
 		}
 	}// notifyObservers

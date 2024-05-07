@@ -22,13 +22,14 @@ import net.wimpi.modbus.ModbusIOException;
 import net.wimpi.modbus.msg.ModbusMessage;
 import net.wimpi.modbus.msg.ModbusRequest;
 import net.wimpi.modbus.msg.ModbusResponse;
+import net.wimpi.modbus.serial.SerialInputStream;
+import net.wimpi.modbus.serial.SerialOutputStream;
 import net.wimpi.modbus.util.ModbusUtil;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import jssc.SerialInputStream;
-import jssc.SerialOutputStream;
+
 
 /**
  * Class that implements the Modbus/ASCII transport flavor.
@@ -55,11 +56,13 @@ public class ModbusASCIITransport extends ModbusSerialTransport {
 	public ModbusASCIITransport() {
 	}// constructor
 
+	@Override
 	public void close() throws IOException {
 		m_InputStream.close();
 		m_OutputStream.close();
 	}// close
 
+	@Override
 	public void writeMessage(ModbusMessage msg) throws ModbusIOException {
 
 		try {
@@ -92,6 +95,7 @@ public class ModbusASCIITransport extends ModbusSerialTransport {
 		}
 	}// writeMessage
 
+	@Override
 	public ModbusRequest readRequest() throws ModbusIOException {
 
 		boolean done = false;
@@ -115,7 +119,7 @@ public class ModbusASCIITransport extends ModbusSerialTransport {
 						m_ByteInOut.writeByte(in);
 					}
 					// check LRC
-					if (((int) m_InBuffer[m_ByteInOut.size() - 1] & 0xff) != ModbusUtil
+					if ((m_InBuffer[m_ByteInOut.size() - 1] & 0xff) != ModbusUtil
 							.calculateLRC(m_InBuffer, 0, m_ByteInOut.size() - 1)) {
 						continue;
 					}
@@ -146,6 +150,7 @@ public class ModbusASCIITransport extends ModbusSerialTransport {
 
 	}// readRequest
 
+	@Override
 	public ModbusResponse readResponse() throws ModbusIOException {
 
 		boolean done = false;
@@ -176,11 +181,11 @@ public class ModbusASCIITransport extends ModbusSerialTransport {
 						System.out.println("Received: "
 								+ ModbusUtil.toHex(m_InBuffer, 0, len));
 					// check LRC
-					if (((int) m_InBuffer[len - 1] & 0xff) != ModbusUtil
+					if ((m_InBuffer[len - 1] & 0xff) != ModbusUtil
 							.calculateLRC(m_InBuffer, 0, len - 1)) {
 						if (Modbus.debug)
 							System.out.println("LRC is wrong: received="
-									+ ((int) m_InBuffer[len - 1] & 0xff)
+									+ (m_InBuffer[len - 1] & 0xff)
 									+ " calculated="
 									+ ModbusUtil.calculateLRC(m_InBuffer, 0,
 											len - 1));
@@ -233,6 +238,7 @@ public class ModbusASCIITransport extends ModbusSerialTransport {
 	 * @throws IOException
 	 *             if an I\O related error occurs.
 	 */
+	@Override
 	public void prepareStreams(SerialInputStream in, SerialOutputStream out)
 			throws IOException {
 		m_InputStream = new DataInputStream(new ASCIIInputStream(in));

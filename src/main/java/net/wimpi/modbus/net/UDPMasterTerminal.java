@@ -47,6 +47,7 @@ class UDPMasterTerminal implements UDPTerminal {
 		m_RemoteAddress = addr;
 	}// constructor
 
+	@Override
 	public InetAddress getLocalAddress() {
 		return m_LocalAddress;
 	}// getLocalAddress
@@ -55,6 +56,7 @@ class UDPMasterTerminal implements UDPTerminal {
 		m_LocalAddress = addr;
 	}// setLocalAddress
 
+	@Override
 	public int getLocalPort() {
 		return m_LocalPort;
 	}// getLocalPort
@@ -109,6 +111,7 @@ class UDPMasterTerminal implements UDPTerminal {
 	 * 
 	 * @return <tt>true</tt> if active, <tt>false</tt> otherwise.
 	 */
+	@Override
 	public boolean isActive() {
 		return m_Active;
 	}// isActive
@@ -119,6 +122,7 @@ class UDPMasterTerminal implements UDPTerminal {
 	 * @throws Exception
 	 *             if there is a network failure.
 	 */
+	@Override
 	public synchronized void activate() throws Exception {
 		if (!isActive()) {
 			if (Modbus.debug)
@@ -158,6 +162,7 @@ class UDPMasterTerminal implements UDPTerminal {
 	/**
 	 * Deactivates this <tt>UDPSlaveTerminal</tt>.
 	 */
+	@Override
 	public void deactivate() {
 		try {
 			if (Modbus.debug)
@@ -177,6 +182,7 @@ class UDPMasterTerminal implements UDPTerminal {
 	 * 
 	 * @return the connection's <tt>ModbusTransport</tt>.
 	 */
+	@Override
 	public ModbusUDPTransport getModbusTransport() {
 		return m_ModbusTransport;
 	}// getModbusTransport
@@ -200,6 +206,7 @@ class UDPMasterTerminal implements UDPTerminal {
 		m_Timeout = timeout;
 	}// setReceiveTimeout
 
+	@Override
 	public void sendMessage(byte[] msg) throws Exception {
 
 		DatagramPacket req = new DatagramPacket(msg, msg.length,
@@ -209,6 +216,7 @@ class UDPMasterTerminal implements UDPTerminal {
 		}
 	}// sendPackage
 
+	@Override
 	public byte[] receiveMessage() throws Exception {
 
 		// 1. Prepare buffer and receive package

@@ -89,6 +89,7 @@ public final class WriteMultipleCoilsRequest extends ModbusRequest {
 		setCoils(bv);
 	}// constructor
 
+	@Override
 	public ModbusResponse createResponse() {
 		WriteMultipleCoilsResponse response = null;
 		DigitalOut douts[] = null;
@@ -128,6 +129,7 @@ public final class WriteMultipleCoilsRequest extends ModbusRequest {
 	 * @param ref
 	 *            the reference of the register to start reading from.
 	 */
+	@Override
 	public void setReference(int ref) {
 		m_Reference = ref;
 		// setChanged(true);
@@ -141,6 +143,7 @@ public final class WriteMultipleCoilsRequest extends ModbusRequest {
 	 * @return the reference of the register to start reading from as
 	 *         <tt>int</tt>.
 	 */
+	@Override
 	public int getReference() {
 		return m_Reference;
 	}// getReference
@@ -216,6 +219,7 @@ public final class WriteMultipleCoilsRequest extends ModbusRequest {
 		setDataLength(m_Coils.byteSize() + 5);
 	}// setCoils
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeShort(m_Reference);
 		dout.writeShort(m_Coils.size());
@@ -223,6 +227,7 @@ public final class WriteMultipleCoilsRequest extends ModbusRequest {
 		dout.write(m_Coils.getBytes());
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 
 		m_Reference = din.readUnsignedShort();
@@ -239,6 +244,7 @@ public final class WriteMultipleCoilsRequest extends ModbusRequest {
 		setDataLength(count + 5);
 	}// readData
 
+	@Override
 	public String toString() {
 		return "WriteMultipleCoilsRequest - Ref: " + m_Reference + " Coils: "
 				+ m_Coils.size();

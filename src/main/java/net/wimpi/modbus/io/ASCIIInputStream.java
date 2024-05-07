@@ -56,6 +56,7 @@ public class ASCIIInputStream extends FilterInputStream {
 	 * @throws IOException
 	 *             if an I/O error occurs.
 	 */
+	@Override
 	public int read() throws IOException {
 		StringBuffer sbuf = new StringBuffer(2);
 		int ch = in.read();

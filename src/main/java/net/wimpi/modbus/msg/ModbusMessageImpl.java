@@ -56,6 +56,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 		return m_Headless;
 	}// isHeadless
 
+	@Override
 	public void setHeadless() {
 		m_Headless = true;
 	}// setHeadless
@@ -70,6 +71,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 		m_Headless = b;
 	}// setHeadless
 
+	@Override
 	public int getTransactionID() {
 		return m_TransactionID;
 	}// getTransactionID
@@ -89,6 +91,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 		// setChanged(true);
 	}// setTransactionID
 
+	@Override
 	public int getProtocolID() {
 		return m_ProtocolID;
 	}// getProtocolID
@@ -108,6 +111,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 		// setChanged(true);
 	}// setProtocolID
 
+	@Override
 	public int getDataLength() {
 		return m_DataLength;
 	}// getDataLength
@@ -129,6 +133,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 		m_DataLength = length + 2;
 	}// setData
 
+	@Override
 	public int getUnitID() {
 		return m_UnitID;
 	}// getUnitID
@@ -146,6 +151,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 		// setChanged(true);
 	}// setUnitID
 
+	@Override
 	public int getFunctionCode() {
 		return m_FunctionCode;
 	}// getFunctionCode
@@ -186,6 +192,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 	 * @throws IOException
 	 *             if an I/O related error occurs.
 	 */
+	@Override
 	public void writeTo(DataOutput dout) throws IOException {
 
 		if (!isHeadless()) {
@@ -208,6 +215,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 	 */
 	public abstract void writeData(DataOutput dout) throws IOException;
 
+	@Override
 	public void readFrom(DataInput din) throws IOException {
 		if (!isHeadless()) {
 			setTransactionID(din.readUnsignedShort());
@@ -229,6 +237,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 	 */
 	public abstract void readData(DataInput din) throws IOException;
 
+	@Override
 	public int getOutputLength() {
 		int l = 2 + getDataLength();
 		if (!isHeadless()) {
@@ -244,6 +253,7 @@ public abstract class ModbusMessageImpl implements ModbusMessage {
 	 * 
 	 * @return the message as hex encoded string.
 	 */
+	@Override
 	public String getHexMessage() {
 		return ModbusUtil.toHex(this);
 	}// getHexMessage

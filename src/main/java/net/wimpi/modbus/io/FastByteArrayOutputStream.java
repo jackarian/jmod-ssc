@@ -73,6 +73,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 	 * in this class can be called after the stream has been closed without
 	 * generating an IOException.
 	 */
+	@Override
 	public void close() {
 	}// close
 
@@ -114,6 +115,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 	 * 
 	 * @return String translated from the buffer's contents.
 	 */
+	@Override
 	public String toString() {
 		return new String(buf, 0, count);
 	}// toString
@@ -143,6 +145,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 	 * @param len
 	 *            the number of bytes to write.
 	 */
+	@Override
 	public void write(byte[] b, int off, int len) {
 		ensureCapacity(count + len);
 		System.arraycopy(b, off, buf, count, len);
@@ -155,6 +158,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 	 * @param b
 	 *            the byte to be written.
 	 */
+	@Override
 	public void write(int b) {
 		ensureCapacity(count + 1);
 		buf[count++] = (byte) b;
@@ -180,6 +184,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 	 * @param buf
 	 * @throws IOException
 	 */
+	@Override
 	public void write(byte[] buf) throws IOException {
 		write(buf, 0, buf.length);
 	}// write

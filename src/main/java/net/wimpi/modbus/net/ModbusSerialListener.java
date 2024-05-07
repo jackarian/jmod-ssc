@@ -71,6 +71,7 @@ public class ModbusSerialListener implements Runnable {
 	/**
 	 * Runs this <tt>ModbusSerialListener</tt>. Listen to incoming messages.
 	 */
+	@Override
 	public void run() {
 		try {
 			m_SerialCon.open();

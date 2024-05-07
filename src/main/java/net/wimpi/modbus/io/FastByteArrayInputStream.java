@@ -83,6 +83,7 @@ public class FastByteArrayInputStream extends InputStream {
 	 *         reached.
 	 * @throws IOException
 	 */
+	@Override
 	public int read() throws IOException {
 		if ((pos < count)) {
 			return (buf[pos++] & 0xff);
@@ -109,6 +110,7 @@ public class FastByteArrayInputStream extends InputStream {
 	 *         no more data because the end of the stream has been reached.
 	 * @throws IOException
 	 */
+	@Override
 	public int read(byte[] toBuf, int offset, int length) throws IOException {
 		int avail = count - pos;
 
@@ -124,6 +126,7 @@ public class FastByteArrayInputStream extends InputStream {
 		return length;
 	}// read
 
+	@Override
 	public int read(byte[] toBuf) throws IOException {
 		return read(toBuf, 0, toBuf.length);
 	}// read
@@ -141,6 +144,7 @@ public class FastByteArrayInputStream extends InputStream {
 	 *            the number of bytes to be skipped.
 	 * @return the actual number of bytes skipped.
 	 */
+	@Override
 	public long skip(long n) {
 		int skip = this.count - this.pos - (int) n;
 		if (skip > 0) {
@@ -152,6 +156,7 @@ public class FastByteArrayInputStream extends InputStream {
 	/**
 	 * The close method for this <tt>FastByteArrayInputStream</tt> does nothing.
 	 */
+	@Override
 	public void close() {
 		return;
 	}// close
@@ -162,6 +167,7 @@ public class FastByteArrayInputStream extends InputStream {
 	 * 
 	 * @return the number of bytes that can be skipped.
 	 */
+	@Override
 	public int available() {
 		return count - pos;
 	}// available
@@ -175,6 +181,7 @@ public class FastByteArrayInputStream extends InputStream {
 	 * @param limit
 	 *            a read limit that invalidates the mark if passed.
 	 */
+	@Override
 	public void mark(int limit) {
 		mark = pos;
 		readlimit = limit;
@@ -186,6 +193,7 @@ public class FastByteArrayInputStream extends InputStream {
 	 * 
 	 * @return true if supported, false otherwise.
 	 */
+	@Override
 	public boolean markSupported() {
 		return true;
 	}// markSupported
@@ -197,6 +205,7 @@ public class FastByteArrayInputStream extends InputStream {
 	 * @throws IOException
 	 *             if the readlimit was exceeded.
 	 */
+	@Override
 	public void reset() throws IOException {
 		if (readlimit < 0 || pos > mark + readlimit) {
 			pos = mark;

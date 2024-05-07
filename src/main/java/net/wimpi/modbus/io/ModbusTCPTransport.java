@@ -79,14 +79,16 @@ public class ModbusTCPTransport implements ModbusTransport {
 		prepareStreams(socket);
 	}// setSocket
 
+	@Override
 	public void close() throws IOException {
 		m_Input.close();
 		m_Output.close();
 	}// close
 
+	@Override
 	public void writeMessage(ModbusMessage msg) throws ModbusIOException {
 		try {
-			msg.writeTo((DataOutput) m_Output);
+			msg.writeTo(m_Output);
 			m_Output.flush();
 			// write more sophisticated exception handling
 		} catch (Exception ex) {
@@ -94,6 +96,7 @@ public class ModbusTCPTransport implements ModbusTransport {
 		}
 	}// write
 
+	@Override
 	public ModbusRequest readRequest() throws ModbusIOException {
 
 		// System.out.println("readRequest()");
@@ -150,6 +153,7 @@ public class ModbusTCPTransport implements ModbusTransport {
 		}
 	}// readRequest
 
+	@Override
 	public void flush() {
 		try {
 			m_Input.skip(m_Input.available());
@@ -158,6 +162,7 @@ public class ModbusTCPTransport implements ModbusTransport {
 		}
 	}
 
+	@Override
 	public ModbusResponse readResponse() throws ModbusIOException {
 		// System.out.println("readResponse()");
 

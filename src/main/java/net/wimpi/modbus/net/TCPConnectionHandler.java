@@ -56,6 +56,7 @@ public class TCPConnectionHandler implements Runnable {
 		m_Transport = m_Connection.getModbusTransport();
 	}// setConnection
 
+	@Override
 	public void run() {
 		try {
 			do {

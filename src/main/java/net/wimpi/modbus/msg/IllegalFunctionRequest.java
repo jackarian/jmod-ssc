@@ -48,14 +48,17 @@ public class IllegalFunctionRequest extends ModbusRequest {
 		setFunctionCode(fc);
 	}// constructor
 
+	@Override
 	public ModbusResponse createResponse() {
 		return this.createExceptionResponse(Modbus.ILLEGAL_FUNCTION_EXCEPTION);
 	}// createResponse
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		throw new RuntimeException();
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 		// skip all following bytes
 		int length = getDataLength();

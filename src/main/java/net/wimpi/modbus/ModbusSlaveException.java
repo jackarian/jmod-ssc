@@ -83,6 +83,7 @@ public class ModbusSlaveException extends ModbusException {
 		return (TYPE == m_Type);
 	}// isType
 
+	@Override
 	public String getMessage() {
 		return "Error Code = " + m_Type;
 	}// getMessage

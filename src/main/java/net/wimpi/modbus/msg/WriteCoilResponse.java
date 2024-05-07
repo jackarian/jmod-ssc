@@ -84,6 +84,7 @@ public final class WriteCoilResponse extends ModbusResponse {
 		return m_Coil;
 	}// getCoil
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeShort(getReference());
 		if (getCoil()) {
@@ -93,6 +94,7 @@ public final class WriteCoilResponse extends ModbusResponse {
 		}
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 		setReference(din.readUnsignedShort());
 
@@ -111,6 +113,7 @@ public final class WriteCoilResponse extends ModbusResponse {
 		setDataLength(4);
 	}// readData
 
+	@Override
 	public String toString() {
 		return "WriteCoilResponse - Ref: " + getReference() + " Coil: "
 				+ m_Coil;

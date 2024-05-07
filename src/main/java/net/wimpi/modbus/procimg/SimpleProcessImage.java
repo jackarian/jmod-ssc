@@ -55,18 +55,21 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		m_Locked = locked;
 	}// setLocked
 
+	@Override
 	public void addDigitalIn(DigitalIn di) {
 		if (!isLocked()) {
 			m_DigitalInputs.addElement(di);
 		}
 	}// addDigitalIn
 
+	@Override
 	public void removeDigitalIn(DigitalIn di) {
 		if (!isLocked()) {
 			m_DigitalInputs.removeElement(di);
 		}
 	}// removeDigitalIn
 
+	@Override
 	public void setDigitalIn(int ref, DigitalIn di)
 			throws IllegalAddressException {
 		if (!isLocked()) {
@@ -78,6 +81,7 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// setDigitalIn
 
+	@Override
 	public DigitalIn getDigitalIn(int ref) throws IllegalAddressException {
 
 		try {
@@ -87,10 +91,12 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// getDigitalIn
 
+	@Override
 	public int getDigitalInCount() {
 		return m_DigitalInputs.size();
 	}// getDigitalInCount
 
+	@Override
 	public DigitalIn[] getDigitalInRange(int ref, int count) {
 		// ensure valid reference range
 		if (ref < 0 || ref + count > m_DigitalInputs.size()) {
@@ -104,18 +110,21 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// getDigitalInRange
 
+	@Override
 	public void addDigitalOut(DigitalOut _do) {
 		if (!isLocked()) {
 			m_DigitalOutputs.addElement(_do);
 		}
 	}// addDigitalOut
 
+	@Override
 	public void removeDigitalOut(DigitalOut _do) {
 		if (!isLocked()) {
 			m_DigitalOutputs.removeElement(_do);
 		}
 	}// removeDigitalOut
 
+	@Override
 	public void setDigitalOut(int ref, DigitalOut _do)
 			throws IllegalAddressException {
 		if (!isLocked()) {
@@ -127,6 +136,7 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// setDigitalOut
 
+	@Override
 	public DigitalOut getDigitalOut(int ref) throws IllegalAddressException {
 		try {
 			return m_DigitalOutputs.elementAt(ref);
@@ -135,10 +145,12 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// getDigitalOut
 
+	@Override
 	public int getDigitalOutCount() {
 		return m_DigitalOutputs.size();
 	}// getDigitalOutCount
 
+	@Override
 	public DigitalOut[] getDigitalOutRange(int ref, int count) {
 		// ensure valid reference range
 		if (ref < 0 || ref + count > m_DigitalOutputs.size()) {
@@ -152,18 +164,21 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// getDigitalOutRange
 
+	@Override
 	public void addInputRegister(InputRegister reg) {
 		if (!isLocked()) {
 			m_InputRegisters.addElement(reg);
 		}
 	}// addInputRegister
 
+	@Override
 	public void removeInputRegister(InputRegister reg) {
 		if (!isLocked()) {
 			m_InputRegisters.removeElement(reg);
 		}
 	}// removeInputRegister
 
+	@Override
 	public void setInputRegister(int ref, InputRegister reg)
 			throws IllegalAddressException {
 		if (!isLocked()) {
@@ -175,6 +190,7 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// setInputRegister
 
+	@Override
 	public InputRegister getInputRegister(int ref)
 			throws IllegalAddressException {
 
@@ -185,10 +201,12 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// getInputRegister
 
+	@Override
 	public int getInputRegisterCount() {
 		return m_InputRegisters.size();
 	}// getInputRegisterCount
 
+	@Override
 	public InputRegister[] getInputRegisterRange(int ref, int count) {
 		// ensure valid reference range
 		if (ref < 0 || ref + count > m_InputRegisters.size()) {
@@ -202,18 +220,21 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// getInputRegisterRange
 
+	@Override
 	public void addRegister(Register reg) {
 		if (!isLocked()) {
 			m_Registers.addElement(reg);
 		}
 	}// addRegister
 
+	@Override
 	public void removeRegister(Register reg) {
 		if (!isLocked()) {
 			m_Registers.removeElement(reg);
 		}
 	}// removeRegister
 
+	@Override
 	public void setRegister(int ref, Register reg)
 			throws IllegalAddressException {
 		if (!isLocked()) {
@@ -225,6 +246,7 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// setRegister
 
+	@Override
 	public Register getRegister(int ref) throws IllegalAddressException {
 
 		try {
@@ -234,10 +256,12 @@ public class SimpleProcessImage implements ProcessImageImplementation {
 		}
 	}// getRegister
 
+	@Override
 	public int getRegisterCount() {
 		return m_Registers.size();
 	}// getRegisterCount
 
+	@Override
 	public Register[] getRegisterRange(int ref, int count) {
 		// ensure valid reference range
 		if (ref < 0 || ref + count > m_Registers.size()) {

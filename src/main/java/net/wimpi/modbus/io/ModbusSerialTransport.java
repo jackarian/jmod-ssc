@@ -24,12 +24,13 @@ import net.wimpi.modbus.ModbusIOException;
 import net.wimpi.modbus.msg.ModbusMessage;
 import net.wimpi.modbus.msg.ModbusRequest;
 import net.wimpi.modbus.msg.ModbusResponse;
+import net.wimpi.modbus.serial.SerialInputStream;
+import net.wimpi.modbus.serial.SerialOutputStream;
 import net.wimpi.modbus.util.ModbusUtil;
 
 import java.io.IOException;
 
-import jssc.SerialInputStream;
-import jssc.SerialOutputStream;
+
 import jssc.SerialPort;
 
 /**
@@ -56,6 +57,7 @@ abstract public class ModbusSerialTransport implements ModbusTransport {
 	 * @exception ModbusIOException
 	 *                if an error occurs
 	 */
+	@Override
 	abstract public ModbusResponse readResponse() throws ModbusIOException;
 
 	/**
@@ -67,6 +69,7 @@ abstract public class ModbusSerialTransport implements ModbusTransport {
 	 * @exception ModbusIOException
 	 *                if an error occurs
 	 */
+	@Override
 	abstract public ModbusRequest readRequest() throws ModbusIOException;
 
 	/**
@@ -78,6 +81,7 @@ abstract public class ModbusSerialTransport implements ModbusTransport {
 	 * @exception ModbusIOException
 	 *                if an error occurs
 	 */
+	@Override
 	abstract public void writeMessage(ModbusMessage msg)
 			throws ModbusIOException;
 
@@ -87,6 +91,7 @@ abstract public class ModbusSerialTransport implements ModbusTransport {
 	 * @exception IOException
 	 *                if an error occurs
 	 */
+	@Override
 	abstract public void close() throws IOException;
 	
 	/**

@@ -117,11 +117,13 @@ public final class ReadCoilsResponse extends ModbusResponse {
 		m_Coils.setBit(index, b);
 	}// setCoilStatus
 
+	@Override
 	public void writeData(DataOutput dout) throws IOException {
 		dout.writeByte(m_Coils.byteSize());
 		dout.write(m_Coils.getBytes(), 0, m_Coils.byteSize());
 	}// writeData
 
+	@Override
 	public void readData(DataInput din) throws IOException {
 		int count = din.readUnsignedByte();
 		byte[] data = new byte[count];
@@ -134,6 +136,7 @@ public final class ReadCoilsResponse extends ModbusResponse {
 		setDataLength(count + 1);
 	}// readData
 
+	@Override
 	public String toString() {
 		return "ReadCoilsResponse - Coils: " + getBitCount();
 	}
