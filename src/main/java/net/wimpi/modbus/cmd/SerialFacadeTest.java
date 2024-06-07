@@ -62,7 +62,7 @@ public class SerialFacadeTest {
 		int inChar = -1;
 		int result = 0;
 		boolean finished = false;
-		int slaveId = 6;
+		int slaveId = 1;
 		String portname = null;
 		ModbusSerialMaster msm = null;
 
@@ -109,7 +109,7 @@ public class SerialFacadeTest {
 			msm = new ModbusSerialMaster(params);
 			msm.connect();
 
-			slaveId= 5;
+			
 
 			BitVector value = new BitVector(8);
 			value.setBit(0, false);
@@ -117,14 +117,23 @@ public class SerialFacadeTest {
 			value.setBit(2, false);
 			value.setBit(3, false);
 			value.setBit(4, false);
-			value.setBit(5, true);
-			value.setBit(6, true);
-			value.setBit(7, true);
+			value.setBit(5, false);
+			value.setBit(6, false);
+			value.setBit(7, false);
 
-			if (slaveId == 0) {
+			if (slaveId == 1) {
 
-				 msm.writeCoil(slaveId, 0x10, true); //OUTPUT 0
-//				 msm.writeCoil(slaveId, 0x11, false);// OUTPUT 1
+				///Register[] regs = new Register[1];
+				///regs[0] = new SimpleInputRegister(0x01);
+				
+				 //msm.writeMultipleCoils(slaveId, 0x00, value); //OUTPUT 0
+				 //msm.writeMultipleRegisters(slaveId, 0x00, regs);
+				 
+				 
+				 msm.writeCoil(slaveId, 0x00, false);// OUTPUT 1
+				 msm.writeCoil(slaveId, 0x01, false);// OUTPUT 1
+				 msm.writeCoil(slaveId, 0x02, false);// OUTPUT 1
+				 msm.writeCoil(slaveId, 0x03, false);// OUTPUT 1
 //				 msm.writeCoil(slaveId, 0x12, false);// OUTPUT 2
 //				 msm.writeCoil(slaveId, 0x13, false);// OUTPUT 3
 //				 msm.writeCoil(slaveId, 0x14, false);// OUTPUT 4
@@ -132,15 +141,15 @@ public class SerialFacadeTest {
 //				 msm.writeCoil(slaveId, 0x16, false);// OUTPUT 6
 //				 msm.writeCoil(slaveId, 0x17, false);// OUTPUT 7
 
-				msm.writeMultipleCoils(slaveId, 0x10, value);
+				//msm.writeMultipleCoils(slaveId, 0x10, value);
     			 
     			 
-				 InputRegister[] inputs = msm.readMultipleRegisters(slaveId, YottaProtocolAddressMapping.ModuleID.getAddress(),1);
+			///	 InputRegister[] inputs = msm.readMultipleRegisters(slaveId, YottaProtocolAddressMapping.ModuleID.getAddress(),1);
 				 
-				 if(inputs!=null) {
-					short val = ModbusUtil.registerToShort(inputs[0].toBytes());
-					System.out.println("Valore estratto registro: "+val);
-				}
+			//	 if(inputs!=null) {
+				//	short val = ModbusUtil.registerToShort(inputs[0].toBytes());
+					//System.out.println("Valore estratto registro: "+val);
+		//		}
 
 			}
 			InputRegister[] inputs = null;
@@ -149,7 +158,7 @@ public class SerialFacadeTest {
 			regs[0] = new SimpleInputRegister(0x4100);
 	
 
-			if (slaveId > 0&&slaveId!=5) {
+			if (slaveId==6) {
 				
 					System.out.println("Tentativo lettura slave: " + slaveId);
 					try {

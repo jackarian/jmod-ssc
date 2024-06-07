@@ -38,7 +38,7 @@ public class TCPSlaveTest {
 
 		ModbusTCPListener listener = null;
 		SimpleProcessImage spi = null;
-		int port = Modbus.DEFAULT_PORT;
+		int port = 5000;
 
 		try {
 			if (args != null && args.length == 1) {
@@ -68,7 +68,7 @@ public class TCPSlaveTest {
 			// 2. create the coupler holding the image
 			ModbusCoupler.getReference().setProcessImage(spi);
 			ModbusCoupler.getReference().setMaster(false);
-			ModbusCoupler.getReference().setUnitID(15);
+			ModbusCoupler.getReference().setUnitID(1);
 
 			// 3. create a listener with 3 threads in pool
 			if (Modbus.debug)

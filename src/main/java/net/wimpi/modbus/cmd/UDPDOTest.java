@@ -50,49 +50,25 @@ public class UDPDOTest {
 		ModbusUDPTransaction trans = null;
 		WriteCoilRequest req = null;
 
-		InetAddress addr = null;
+		InetAddress addy = null;
 
-		int ref = 0;
+		int ref = 1;
 		boolean set = false;
 		int repeat = 1;
 		int port = Modbus.DEFAULT_PORT;
 
 		try {
 
-			// 1. Setup the parameters
-			if (args.length < 3) {
-				printUsage();
-				System.exit(1);
-			} else {
-				try {
-					String astr = args[0];
-					int idx = astr.indexOf(':');
-					if (idx > 0) {
-						port = Integer.parseInt(astr.substring(idx + 1));
-						astr = astr.substring(0, idx);
-					}
-					addr = InetAddress.getByName(astr);
-					ref = Integer.parseInt(args[1]);
-					set = "true".equals(args[2]);
-
-					if (args.length == 4) {
-						repeat = Integer.parseInt(args[3]);
-					}
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					printUsage();
-					System.exit(1);
-				}
-			}
+			addy = InetAddress.getByName("modbus");
 
 			// 2. Open the connection
-			conn = new UDPMasterConnection(addr);
+			conn = new UDPMasterConnection(addy);
 			conn.setPort(port);
 			conn.connect();
 
 			// 3. Prepare a request
-			req = new WriteCoilRequest(ref, set);
-			req.setUnitID(0);
+			req = new WriteCoilRequest(0x00, true);
+			req.setUnitID(1);
 			if (Modbus.debug)
 				System.out.println("Request: " + req.getHexMessage());
 
@@ -105,9 +81,11 @@ public class UDPDOTest {
 			do {
 				trans.execute();
 
-				if (Modbus.debug)
+				if (Modbus.debug) {
+					if(trans.getResponse()!=null)
 					System.out.println("Response: "
 							+ trans.getResponse().getHexMessage());
+				}
 				k++;
 			} while (k < repeat);
 
