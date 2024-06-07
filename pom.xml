@@ -5,7 +5,6 @@
 	<groupId>jamod-modbus</groupId>
 	<artifactId>jamod-modbus-scc</artifactId>
 	<version>1.2.1</version>
-
 	<dependencies>		
 		<dependency>
 			<groupId>io.github.java-native</groupId>
