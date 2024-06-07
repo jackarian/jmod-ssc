@@ -39,18 +39,15 @@ public class TCPMasterTest {
 
 	private static int requestNumber = 1;
 	
-	private static String SLAVE_ADDRESS ="192.168.2.192";
 	
 	public static void main(String[] args) {
-		int port = Modbus.DEFAULT_PORT;
+		int port = 4196;
 		int unitId = 1; 
 		try {
-			if (args != null && args.length == 1) {
-				port = Integer.parseInt(args[0]);
-			}
-			InetAddress addy = InetAddress.getByName("192.168.2.192");
+			
+			InetAddress addy = InetAddress.getByName("192.168.178.20");
 			TCPMasterConnection connection = new TCPMasterConnection(addy);
-			connection.setTimeout(3000);
+			connection.setTimeout(10000);
 			connection.setPort(port);
 			System.out.println("Trying to connect to "+addy.getCanonicalHostName()+" on port "+port);
 			connection.connect();
@@ -61,7 +58,7 @@ public class TCPMasterTest {
 			requestNumber = 1;
 			
 			//if((request = getNextRequest()) != null) {
-			    request = writeSingleCoil(0x00, false);
+			    request = writeSingleCoil(0x00, true);
 				request.setUnitID(unitId);
 				transaction.setRequest(request);
 				transaction.execute();
@@ -79,6 +76,13 @@ public class TCPMasterTest {
 				transaction.execute();
 				response = transaction.getResponse();				
 				gotResponse(response);
+				request = readCoils(0x00, 8);
+				request.setUnitID(unitId);
+				transaction.setRequest(request);
+				transaction.execute();
+				response = transaction.getResponse();				
+				gotResponse(response);
+				
 			//}
 			connection.close();
 		} catch (Exception e) {
@@ -116,6 +120,9 @@ public class TCPMasterTest {
 	
 	public static ModbusRequest writeSingleCoil(int address,boolean value) {
 		return new WriteCoilRequest(address,value);
+	}
+	public static ModbusRequest readCoils(int address,int numberOfBytes) {
+		return new ReadCoilsRequest(address, numberOfBytes);
 	}
 	
 	public static ModbusRequest writeMultipleCoils(int address,byte[] value) {
