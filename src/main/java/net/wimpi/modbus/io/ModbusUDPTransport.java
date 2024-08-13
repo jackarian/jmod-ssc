@@ -16,16 +16,15 @@
 
 package net.wimpi.modbus.io;
 
-import java.io.DataOutput;
-import java.io.IOException;
-import java.io.InterruptedIOException;
-
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusIOException;
 import net.wimpi.modbus.msg.ModbusMessage;
 import net.wimpi.modbus.msg.ModbusRequest;
 import net.wimpi.modbus.msg.ModbusResponse;
 import net.wimpi.modbus.net.UDPTerminal;
+
+import java.io.IOException;
+import java.io.InterruptedIOException;
 
 /**
  * Class that implements the Modbus UDP transport flavor.

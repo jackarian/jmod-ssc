@@ -19,6 +19,7 @@
 
 package net.wimpi.modbus.io;
 
+import jssc.SerialPort;
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusIOException;
 import net.wimpi.modbus.msg.ModbusMessage;
@@ -29,9 +30,6 @@ import net.wimpi.modbus.serial.SerialOutputStream;
 import net.wimpi.modbus.util.ModbusUtil;
 
 import java.io.IOException;
-
-
-import jssc.SerialPort;
 
 /**
  * Abstract base class for serial <tt>ModbusTransport</tt> implementations.

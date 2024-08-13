@@ -41,15 +41,12 @@ package net.wimpi.modbus.cmd;
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusException;
 import net.wimpi.modbus.facade.ModbusSerialMaster;
-import net.wimpi.modbus.io.ORWE515.OrnoWE515AddressMapping;
 import net.wimpi.modbus.io.ORWE515.OrnoWE515Utils;
 import net.wimpi.modbus.io.sdm120M.SDMUtils;
-import net.wimpi.modbus.io.yotta.YottaProtocolAddressMapping;
 import net.wimpi.modbus.procimg.InputRegister;
 import net.wimpi.modbus.procimg.Register;
 import net.wimpi.modbus.procimg.SimpleInputRegister;
 import net.wimpi.modbus.util.BitVector;
-import net.wimpi.modbus.util.ModbusUtil;
 import net.wimpi.modbus.util.SerialParameters;
 
 public class SerialFacadeTest {

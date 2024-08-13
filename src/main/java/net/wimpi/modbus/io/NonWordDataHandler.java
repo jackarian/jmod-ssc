@@ -19,9 +19,9 @@
 
 package net.wimpi.modbus.io;
 
+import java.io.DataInput;
 import java.io.EOFException;
 import java.io.IOException;
-import java.io.DataInput;
 
 /**
  * Interface implementing a non word data handler for the read/write multiple

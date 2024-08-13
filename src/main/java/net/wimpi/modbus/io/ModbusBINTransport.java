@@ -19,12 +19,12 @@ package net.wimpi.modbus.io;
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.ModbusIOException;
-import net.wimpi.modbus.util.ModbusUtil;
 import net.wimpi.modbus.msg.ModbusMessage;
 import net.wimpi.modbus.msg.ModbusRequest;
 import net.wimpi.modbus.msg.ModbusResponse;
 import net.wimpi.modbus.serial.SerialInputStream;
 import net.wimpi.modbus.serial.SerialOutputStream;
+import net.wimpi.modbus.util.ModbusUtil;
 
 import java.io.DataInputStream;
 import java.io.IOException;

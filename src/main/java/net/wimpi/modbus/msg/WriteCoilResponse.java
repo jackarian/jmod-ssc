@@ -19,11 +19,11 @@
 
 package net.wimpi.modbus.msg;
 
+import net.wimpi.modbus.Modbus;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-
-import net.wimpi.modbus.Modbus;
 
 /**
  * Class implementing a <tt>WriteCoilResponse</tt>. The implementation directly

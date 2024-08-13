@@ -19,12 +19,12 @@
 
 package net.wimpi.modbus.msg;
 
+import net.wimpi.modbus.Modbus;
+import net.wimpi.modbus.util.BitVector;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-
-import net.wimpi.modbus.util.BitVector;
-import net.wimpi.modbus.Modbus;
 
 /**
  * Class implementing a <tt>ReadCoilsResponse</tt>. The implementation directly

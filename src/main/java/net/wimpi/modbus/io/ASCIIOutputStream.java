@@ -16,11 +16,11 @@
 
 package net.wimpi.modbus.io;
 
+import net.wimpi.modbus.util.ModbusUtil;
+
+import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.FilterOutputStream;
-
-import net.wimpi.modbus.util.ModbusUtil;
 
 /**
  * Class implementing a specialized <tt>OutputStream</tt> which encodes bytes

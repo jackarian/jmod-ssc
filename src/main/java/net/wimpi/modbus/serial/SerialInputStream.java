@@ -1,10 +1,10 @@
 package net.wimpi.modbus.serial;
 
 
+import jssc.SerialPort;
+
 import java.io.IOException;
 import java.io.InputStream;
-
-import jssc.SerialPort;
 
 /**
  * Class that wraps a {@link SerialPort} to provide

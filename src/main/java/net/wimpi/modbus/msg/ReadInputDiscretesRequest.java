@@ -19,15 +19,15 @@
 
 package net.wimpi.modbus.msg;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
-
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.procimg.DigitalIn;
 import net.wimpi.modbus.procimg.IllegalAddressException;
 import net.wimpi.modbus.procimg.ProcessImage;
+
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
 
 /**
  * Class implementing a <tt>ReadInputDiscretesRequest</tt>. The implementation

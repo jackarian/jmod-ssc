@@ -2,7 +2,6 @@ package net.wimpi.modbus.io.sdm120M;
 
 import net.wimpi.modbus.ModbusException;
 import net.wimpi.modbus.facade.ModbusSerialMaster;
-
 import net.wimpi.modbus.procimg.InputRegister;
 import net.wimpi.modbus.procimg.Register;
 import net.wimpi.modbus.procimg.SimpleInputRegister;

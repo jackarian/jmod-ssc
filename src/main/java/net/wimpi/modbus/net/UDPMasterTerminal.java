@@ -16,12 +16,12 @@
 
 package net.wimpi.modbus.net;
 
+import net.wimpi.modbus.Modbus;
+import net.wimpi.modbus.io.ModbusUDPTransport;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-
-import net.wimpi.modbus.Modbus;
-import net.wimpi.modbus.io.ModbusUDPTransport;
 
 /**
  * Class implementing a <tt>UDPMasterTerminal</tt>.

@@ -4,6 +4,7 @@ import net.wimpi.modbus.ModbusException;
 import net.wimpi.modbus.facade.ModbusSerialMaster;
 import net.wimpi.modbus.procimg.InputRegister;
 import net.wimpi.modbus.util.ModbusUtil;
+
 import static net.wimpi.modbus.io.ORWE515.OrnoWE515AddressMapping.*;
 
 public class OrnoWE515Utils {

@@ -16,8 +16,8 @@
 
 package net.wimpi.modbus.cmd;
 
-import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.Modbus;
+import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.io.ModbusSerialTransaction;
 import net.wimpi.modbus.msg.ReadInputRegistersRequest;
 import net.wimpi.modbus.msg.ReadInputRegistersResponse;

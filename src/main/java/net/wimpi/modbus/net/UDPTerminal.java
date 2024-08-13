@@ -16,9 +16,9 @@
 
 package net.wimpi.modbus.net;
 
-import java.net.InetAddress;
-
 import net.wimpi.modbus.io.ModbusUDPTransport;
+
+import java.net.InetAddress;
 
 /**
  * Interface defining a <tt>UDPTerminal</tt>.

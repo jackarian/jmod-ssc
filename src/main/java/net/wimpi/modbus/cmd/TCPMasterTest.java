@@ -16,15 +16,14 @@
 
 package net.wimpi.modbus.cmd;
 
-import java.net.InetAddress;
-
-import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.io.ModbusTCPTransaction;
 import net.wimpi.modbus.msg.*;
 import net.wimpi.modbus.net.TCPMasterConnection;
 import net.wimpi.modbus.procimg.Register;
 import net.wimpi.modbus.util.BitVector;
+
+import java.net.InetAddress;
 
 
 /**

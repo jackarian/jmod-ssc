@@ -19,12 +19,12 @@
 
 package net.wimpi.modbus.cmd;
 
-import java.net.InetAddress;
-
+import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.io.ModbusUDPTransaction;
 import net.wimpi.modbus.msg.WriteCoilRequest;
 import net.wimpi.modbus.net.UDPMasterConnection;
-import net.wimpi.modbus.Modbus;
+
+import java.net.InetAddress;
 
 /**
  * Class that implements a simple commandline tool for writing to a digital

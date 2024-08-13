@@ -19,11 +19,10 @@
 
 package net.wimpi.modbus.util;
 
+import jssc.SerialPort;
 import net.wimpi.modbus.Modbus;
 
 import java.util.Properties;
-
-import jssc.SerialPort;
 
 /**
  * Helper class wrapping all serial port communication parameters.

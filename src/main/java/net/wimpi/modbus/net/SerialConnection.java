@@ -19,14 +19,13 @@
 
 package net.wimpi.modbus.net;
 
+import jssc.SerialPort;
+import jssc.SerialPortException;
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.io.*;
 import net.wimpi.modbus.util.SerialParameters;
 
 import java.io.IOException;
-
-import jssc.SerialPort;
-import jssc.SerialPortException;
 
 /**
  * Class that implements a serial connection which can be used for master and

@@ -19,14 +19,14 @@
 
 package net.wimpi.modbus.cmd;
 
-import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.Modbus;
+import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.io.ModbusSerialTransaction;
 import net.wimpi.modbus.msg.ReadInputDiscretesRequest;
 import net.wimpi.modbus.msg.ReadInputDiscretesResponse;
 import net.wimpi.modbus.net.SerialConnection;
-import net.wimpi.modbus.util.SerialParameters;
 import net.wimpi.modbus.util.BitVector;
+import net.wimpi.modbus.util.SerialParameters;
 
 /**
  * Class that implements a simple commandline tool for reading an analog input.

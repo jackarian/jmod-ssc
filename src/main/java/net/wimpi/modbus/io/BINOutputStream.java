@@ -16,9 +16,9 @@
 
 package net.wimpi.modbus.io;
 
+import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.FilterOutputStream;
 
 /**
  * Class implementing a specialized <tt>OutputStream</tt> which duplicates bytes

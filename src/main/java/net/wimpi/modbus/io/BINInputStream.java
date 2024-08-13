@@ -16,9 +16,9 @@
 
 package net.wimpi.modbus.io;
 
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.FilterInputStream;
 
 /**
  * Class implementing a specialized <tt>InputStream</tt> which handles binary

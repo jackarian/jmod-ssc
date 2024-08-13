@@ -19,11 +19,11 @@
 
 package net.wimpi.modbus.msg;
 
+import net.wimpi.modbus.Modbus;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-
-import net.wimpi.modbus.Modbus;
 
 /**
  * Abstract class implementing a <tt>ModbusResponse</tt>. This class provides

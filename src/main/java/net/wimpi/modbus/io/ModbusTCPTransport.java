@@ -16,22 +16,16 @@
 
 package net.wimpi.modbus.io;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.IOException;
-import java.net.Socket;
-import java.net.SocketException;
-
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusIOException;
 import net.wimpi.modbus.msg.ModbusMessage;
 import net.wimpi.modbus.msg.ModbusRequest;
 import net.wimpi.modbus.msg.ModbusResponse;
 import net.wimpi.modbus.util.ModbusUtil;
+
+import java.io.*;
+import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * Class that implements the Modbus transport flavor.

@@ -19,13 +19,13 @@
 
 package net.wimpi.modbus.net;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
-
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.io.ModbusTCPTransport;
 import net.wimpi.modbus.io.ModbusTransport;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
 
 /**
  * Class that implements a TCPSlaveConnection.

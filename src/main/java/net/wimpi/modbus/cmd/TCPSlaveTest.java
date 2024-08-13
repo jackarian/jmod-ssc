@@ -16,14 +16,10 @@
 
 package net.wimpi.modbus.cmd;
 
-import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.Modbus;
+import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.net.ModbusTCPListener;
-import net.wimpi.modbus.procimg.SimpleDigitalIn;
-import net.wimpi.modbus.procimg.SimpleDigitalOut;
-import net.wimpi.modbus.procimg.SimpleInputRegister;
-import net.wimpi.modbus.procimg.SimpleProcessImage;
-import net.wimpi.modbus.procimg.SimpleRegister;
+import net.wimpi.modbus.procimg.*;
 
 /**
  * Class implementing a simple Modbus/TCP slave. A simple process image is

@@ -16,12 +16,12 @@
 
 package net.wimpi.modbus.io;
 
-import java.io.IOException;
-
 import net.wimpi.modbus.ModbusIOException;
 import net.wimpi.modbus.msg.ModbusMessage;
 import net.wimpi.modbus.msg.ModbusRequest;
 import net.wimpi.modbus.msg.ModbusResponse;
+
+import java.io.IOException;
 
 /**
  * Interface defining the I/O mechanisms for <tt>ModbusMessage</tt> instances.

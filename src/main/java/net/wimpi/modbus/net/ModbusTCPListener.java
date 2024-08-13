@@ -19,16 +19,12 @@
 
 package net.wimpi.modbus.net;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.util.ThreadPool;
+
+import java.io.IOException;
+import java.net.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Class that implements a ModbusTCPListener.<br>

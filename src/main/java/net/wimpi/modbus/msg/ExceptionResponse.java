@@ -16,11 +16,11 @@
 
 package net.wimpi.modbus.msg;
 
+import net.wimpi.modbus.Modbus;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-
-import net.wimpi.modbus.Modbus;
 
 /**
  * Provides the a<tt>ModbusResponse</tt> implementation that represents a Modbus

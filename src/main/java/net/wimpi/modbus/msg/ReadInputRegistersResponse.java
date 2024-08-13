@@ -19,10 +19,10 @@
 
 package net.wimpi.modbus.msg;
 
+import net.wimpi.modbus.Modbus;
+import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.procimg.InputRegister;
 import net.wimpi.modbus.procimg.ProcessImageFactory;
-import net.wimpi.modbus.ModbusCoupler;
-import net.wimpi.modbus.Modbus;
 
 import java.io.DataInput;
 import java.io.DataOutput;
