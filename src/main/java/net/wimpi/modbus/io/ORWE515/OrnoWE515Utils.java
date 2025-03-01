@@ -26,18 +26,25 @@ public class OrnoWE515Utils {
 
 	public static void printCurrent(ModbusSerialMaster msm, int slaveId) throws ModbusException {
 		InputRegister[] inputs = null;
-		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.CurrentPhase1.getAddress(), 1);
+		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.CurrentPhase1.getAddress(), CurrentPhase1.getNumByte());
 
 		if (inputs != null) {
 
-			Short test = ModbusUtil.registerToShort(buildBufferToReadForFloat(1, inputs));
+			int test = ModbusUtil.registerToShort(buildBufferToReadForFloat(1, inputs));
+			int sum = 0;
+            for (InputRegister input : inputs) {
+                if (input != null) {
+                    sum += input.getValue();
+                }
+            }
+			System.out.println("Valore Current: " + sum * factorCurrent);
 			System.out.println("CurrentPhase1: " + test * factorCurrent);
 		}
-		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.SplitPhaseActivePowerP1.getAddress(), 2);
+		inputs = msm.readMultipleRegisters(slaveId, OrnoWE515AddressMapping.SplitPhaseActivePowerP1.getAddress(), SplitPhaseActivePowerP1.getNumByte());
 
 		if (inputs != null) {
 
-			Integer test = ModbusUtil.registersToInt(buildBufferToReadForFloatV2(1, inputs));
+			int test = ModbusUtil.registersToInt(buildBufferToReadForFloatV2(1, inputs));
 			System.out.println("SplitPhaseActivePowerP1: " + test * factorCurrent);
 		}
 
@@ -72,6 +79,15 @@ public class OrnoWE515Utils {
 		}
 	}
 
+	public static byte[] buildBufferToReadForInt(int dim, InputRegister[] inputs) {
+		byte[] buffer = new byte[2];
+		byte[] low = inputs[0].toBytes();
+
+		buffer[0] = low[0];
+		buffer[1] = low[1];
+
+		return buffer;
+	}
 	public static byte[] buildBufferToReadForFloat(int dim, InputRegister[] inputs) {
 		byte[] buffer = new byte[2];
 		byte[] low = inputs[0].toBytes();

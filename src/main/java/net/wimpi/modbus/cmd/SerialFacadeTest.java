@@ -59,7 +59,7 @@ public class SerialFacadeTest {
 		int inChar = -1;
 		int result = 0;
 		boolean finished = false;
-		int slaveId = 1;
+		int slaveId = 5;
 		String portname = null;
 		ModbusSerialMaster msm = null;
 
@@ -82,12 +82,7 @@ public class SerialFacadeTest {
 			System.out.println(" sending test messages to slave: " + slaveId);
 			System.out.println("net.wimpi.modbus.debug set to: " + System.getProperty("net.wimpi.modbus.debug"));
 
-//			System.out.println("Hit enter to start and <s enter> to terminate the test.");
-//			inChar = System.in.read();
-//			if ((inChar == 's') || (inChar == 'S')) {
-//				System.out.println("Exiting");
-//				System.exit(0);
-//			}
+
 
 			// 2. Setup serial parameters
 			SerialParameters params = new SerialParameters();
@@ -106,74 +101,7 @@ public class SerialFacadeTest {
 			msm = new ModbusSerialMaster(params);
 			msm.connect();
 
-			
-
-			BitVector value = new BitVector(8);
-			value.setBit(0, false);
-			value.setBit(1, false);
-			value.setBit(2, false);
-			value.setBit(3, false);
-			value.setBit(4, false);
-			value.setBit(5, false);
-			value.setBit(6, false);
-			value.setBit(7, false);
-
-			if (slaveId == 1) {
-
-				///Register[] regs = new Register[1];
-				///regs[0] = new SimpleInputRegister(0x01);
-				
-				 //msm.writeMultipleCoils(slaveId, 0x00, value); //OUTPUT 0
-				 //msm.writeMultipleRegisters(slaveId, 0x00, regs);
-				 
-				 
-				 msm.writeCoil(slaveId, 0x00, false);// OUTPUT 1
-				 msm.writeCoil(slaveId, 0x01, false);// OUTPUT 1
-				 msm.writeCoil(slaveId, 0x02, false);// OUTPUT 1
-				 msm.writeCoil(slaveId, 0x03, false);// OUTPUT 1
-//				 msm.writeCoil(slaveId, 0x12, false);// OUTPUT 2
-//				 msm.writeCoil(slaveId, 0x13, false);// OUTPUT 3
-//				 msm.writeCoil(slaveId, 0x14, false);// OUTPUT 4
-//				 msm.writeCoil(slaveId, 0x15, false);// OUTPUT 5
-//				 msm.writeCoil(slaveId, 0x16, false);// OUTPUT 6
-//				 msm.writeCoil(slaveId, 0x17, false);// OUTPUT 7
-
-				//msm.writeMultipleCoils(slaveId, 0x10, value);
-    			 
-    			 
-			///	 InputRegister[] inputs = msm.readMultipleRegisters(slaveId, YottaProtocolAddressMapping.ModuleID.getAddress(),1);
-				 
-			//	 if(inputs!=null) {
-				//	short val = ModbusUtil.registerToShort(inputs[0].toBytes());
-					//System.out.println("Valore estratto registro: "+val);
-		//		}
-
-			}
-			InputRegister[] inputs = null;
-			Register[] regs = new Register[2];
-			regs[1] = new SimpleInputRegister(0x0000);
-			regs[0] = new SimpleInputRegister(0x4100);
-	
-
-			if (slaveId==6) {
-				
-					System.out.println("Tentativo lettura slave: " + slaveId);
-					try {
-						   SDMUtils.printVoltage(slaveId,msm);
-						   SDMUtils.printCurrent(slaveId,msm);
-						   SDMUtils.printWatts(slaveId,msm);
-				           SDMUtils.leggMeterId(slaveId, msm);
-				           SDMUtils.printAllValue(slaveId, msm);
-
-					} catch (Exception e) {
-						System.out.println("Fallimento lettura slave: " + slaveId);
-						e.printStackTrace();
-					}
-					Thread.sleep(2000);
-				//}
-			}
-			if(slaveId==5) {
-				System.out.println("Tentativo lettura slave: " + slaveId);
+			System.out.println("Tentativo lettura slave: " + slaveId);
 				try {
 					   OrnoWE515Utils.printVoltage(msm, slaveId);
 					   OrnoWE515Utils.printCurrent(msm, slaveId);
@@ -183,9 +111,9 @@ public class SerialFacadeTest {
 					e.printStackTrace();
 				}
 				Thread.sleep(2000);
-			}
 
-			finished = true;
+
+
 			
 			
 
@@ -193,7 +121,8 @@ public class SerialFacadeTest {
 			System.err.println("SerialFacadeTest driver: " + e);
 			e.printStackTrace();
 		}
-		msm.disconnect();
+        assert msm != null;
+        msm.disconnect();
 	}
 
 	
